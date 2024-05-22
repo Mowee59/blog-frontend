@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "@/components/ui/header/Header";
 import Footer from "@/components/ui/footer/Footer";
+import { ThemeProviderComponent } from "@/providers/theme-provider/ThemeProviderComponent";
 import "./globals.css";
 
 const inter = Inter({
@@ -20,11 +21,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
+    <html lang="fr" suppressHydrationWarning>
       <body className={inter.className}>
-        <Header />
-        {children}
-        <Footer />
+        <ThemeProviderComponent>
+          <Header />
+          {children}
+          <Footer />
+        </ThemeProviderComponent>
       </body>
     </html>
   );
