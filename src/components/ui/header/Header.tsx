@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Header = () => {
   return (
-    <header className={"mb-20 h-9 px-6 pt-5 sm:pt-10"}>
+    <header className="mb-20 h-9 px-6 pt-5 sm:pt-10">
       <div className="container mx-auto flex items-center justify-between lg:max-w-screen-lg">
         <h4 className="text-base font-medium leading-tight text-neutral-900 sm:text-xl">
           Blog
