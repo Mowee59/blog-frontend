@@ -11,7 +11,7 @@ const Footer = () => {
               Blog
             </h4>
 
-            <p className="mb-10 text-sm leading-snug text-neutral-600 sm:mb-0 dark:text-neutral-500">
+            <p className="mb-10 text-sm leading-snug text-neutral-600 sm:mb-0 sm:text-lg sm:leading-7 dark:text-neutral-500">
               Lorem ipsum dolor sit amet consectetur. Egestas convallis amet
               tempus varius neque. Vulputate vivamus egestas vitae.
             </p>
