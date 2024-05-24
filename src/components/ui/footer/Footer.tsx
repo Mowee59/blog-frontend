@@ -8,7 +8,7 @@ const Footer = () => {
         <section className="mb-12 flex flex-col sm:mb-16 sm:flex-row sm:justify-between">
           <div className="sm:max-w-96 ">
             <h4 className="mb-3 text-lg font-medium text-neutral-900 dark:text-neutral-300 sm:mb-5">
-              Blog
+              Aniss.dev
             </h4>
 
             <p className="mb-10 text-sm leading-snug text-neutral-600 dark:text-neutral-500 sm:mb-0 sm:text-lg sm:leading-7">

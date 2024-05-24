@@ -4,7 +4,7 @@ import placeholder from "/public/svg/ph.jpg";
 
 const ArticleCard = () => {
   return (
-    <article className=" @container">
+    <article className=" cursor-pointer @container">
       <div className="flex justify-center gap-5 @lg:gap-8 @3xl:gap-12">
         <div>
           <h3 className=" mb-3 text-xs font-medium leading-3 text-neutral-600 @lg:mb-4 dark:text-neutral-400">

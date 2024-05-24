@@ -7,7 +7,7 @@ const Header = () => {
     <header className="mb-20  mt-5 sm:mt-10">
       <div className="container  flex h-9 items-center justify-between lg:max-w-screen-lg">
         <h4 className="text-base font-medium leading-tight text-neutral-900 dark:text-neutral-300 sm:text-xl">
-          Blog
+          Aniss.dev
         </h4>
         <div className="flex gap-5">
           <nav>
