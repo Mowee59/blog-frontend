@@ -4,8 +4,8 @@ import ThemeSwitch from "./ThemeSwitch";
 
 const Header = () => {
   return (
-    <header className="mb-20  mt-5  sm:mt-10">
-      <div className="container flex h-9 items-center justify-between lg:max-w-screen-lg ">
+    <header className="mb-20  mt-5 sm:mt-10">
+      <div className="container  flex h-9 items-center justify-between lg:max-w-screen-lg">
         <h4 className="text-base font-medium leading-tight text-neutral-900 dark:text-neutral-300 sm:text-xl">
           Blog
         </h4>
@@ -17,6 +17,7 @@ const Header = () => {
               <li className="cursor-pointer">Tags</li>
             </ul>
           </nav>
+          {/* #TODO Handle burger menu icon color depending on theme */}
           <Image
             className="sm:hidden"
             src={"/svg/burgerIcon.svg"}
