@@ -1,3 +1,6 @@
+import { Article } from "@/interfaces/article";
+import { Payload } from "@/interfaces/Payload";
+import { Tag } from "@/interfaces/tag";
 import axios from "axios";
 
 // Creating axios instance
@@ -27,7 +30,23 @@ apiClient.interceptors.request.use(
   },
 );
 
-export const fetchArticles = async () => {
+/**
+ * Fetch all the articles
+ *
+ * @returns A promise that resolves as a payload of Articles
+ */
+export const fetchArticles = async (): Promise<Payload<Article[]>> => {
+  // TODO: Add axios typed response
   const response = await apiClient.get("/articles");
+  return response.data;
+};
+
+/**
+ * Fetch all the tags
+ *
+ * @returns A promise that resolves as a payload of Tags
+ */
+export const fetchTags = async (): Promise<Payload<Tag[]>> => {
+  const response = await apiClient.get("/tags");
   return response.data;
 };
