@@ -1,4 +1,5 @@
 import { Article } from "@/interfaces/article";
+import { BlogHomePage } from "@/interfaces/blog-home-page";
 import { Payload } from "@/interfaces/Payload";
 import { Tag } from "@/interfaces/tag";
 import axios from "axios";
@@ -42,15 +43,13 @@ export const fetchArticles = async (): Promise<Payload<Article[]>> => {
 };
 
 /**
- * Fetch the featured articles
+ * Fetch the home page data
  *
- * @returns A promise that resolves as a payload of Articles
+ * @returns A promise that resolves as a payload containing home page data
  */
-export const fetchFeaturedArticles = async (): Promise<Payload<Article[]>> => {
+export const fetchHomePageData = async (): Promise<Payload<BlogHomePage>> => {
   // TODO: Add axios typed response
-  const response = await apiClient.get(
-    "/articles?filters[featured][$eq]=true&populate=*",
-  );
+  const response = await apiClient.get("/blog-home-page?populate[featuredArticle][populate][0]=coverImage");
   return response.data;
 };
 
