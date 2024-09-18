@@ -8,6 +8,7 @@ const config: Config = {
   ],
   theme: {
     extend: {},
+    //Auto applying centering to container and a fixed padding
     container: {
       center: true,
       padding: "1.5rem",
@@ -17,6 +18,7 @@ const config: Config = {
     require("@tailwindcss/typography"),
     require("@tailwindcss/container-queries"),
   ],
+  // Used to allow theme swhtiching by class name
   darkMode: "class",
 };
 export default config;
