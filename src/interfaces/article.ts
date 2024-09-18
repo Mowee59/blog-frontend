@@ -18,7 +18,6 @@ export interface Article {
     slug: string;
     description: string;
     tags?: { data: Tag[] };
-    featured: boolean;
     locale: string;
     localizations?: { data: Article[] };
   };
@@ -35,7 +34,6 @@ export interface Article_Plain {
   slug: string;
   description: string;
   tags?: Tag_Plain[];
-  featured: boolean;
   locale: string;
   localizations?: Article_Plain[];
 }
@@ -52,7 +50,6 @@ export interface Article_NoRelations {
   slug: string;
   description: string;
   tags?: number[];
-  featured: boolean;
   locale: string;
   localizations?: Article[];
 }
