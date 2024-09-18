@@ -42,6 +42,19 @@ export const fetchArticles = async (): Promise<Payload<Article[]>> => {
 };
 
 /**
+ * Fetch the featured articles
+ *
+ * @returns A promise that resolves as a payload of Articles
+ */
+export const fetchFeaturedArticles = async (): Promise<Payload<Article[]>> => {
+  // TODO: Add axios typed response
+  const response = await apiClient.get(
+    "/articles?filters[featured][$eq]=true&populate=*",
+  );
+  return response.data;
+};
+
+/**
  * Fetch all the tags
  *
  * @returns A promise that resolves as a payload of Tags

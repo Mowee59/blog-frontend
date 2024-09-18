@@ -1,32 +1,43 @@
 import ArticleCard from "@/components/ui/article-card/ArticleCard";
 import Image from "next/image";
 import hero from "/public/svg/hero.jpg";
+import { fetchFeaturedArticles } from "@/libs/api";
 
-export default function Home() {
+const Home = async () => {
+  // Getting the featured articles list
+  const featuredArticles = await fetchFeaturedArticles();
+
+  //Making sure we only get one featured article because we cannot controle featured property is set to true only once in our backend
+  const featuredArticle = featuredArticles.data[0];
+  console.log(
+    `${process.env.STRAPI_API_URL}${featuredArticle.attributes.coverImage.data.attributes.url}`,
+  );
   return (
-    <main className="container flex flex-col gap-7 lg:max-w-screen-lg">
-      <div className=" lg:px-10 xl:px-14">
+    <main className="container flex flex-col gap-8 lg:max-w-screen-lg">
+      <div className=" lg:px-10 xl:px-20">
         <h1 className="mb-6 text-2xl font-medium leading-normal text-neutral-900 dark:text-neutral-300 sm:text-4xl sm:leading-10 lg:mb-8 lg:text-5xl xl:text-6xl">
-          Lorem ipsum dolor sit amet consectetur.
+          {featuredArticle.attributes.title}
         </h1>
         <p className="text-base font-medium text-neutral-700 dark:text-neutral-400 sm:text-lg sm:leading-7 lg:text-xl lg:leading-loose">
-          Lorem ipsum dolor sit amet consectetur. Lectus fringilla amet
-          fringilla maecenas. Volutpat in volutpat dui placerat nec in. Volutpat
-          id.
+          {featuredArticle.attributes.description}
         </p>
       </div>
       {/* #TODO Handle image sizing */}
       <div>
         <div className="relative mx-auto  mb-4 h-[340px] w-full lg:h-[500px] ">
           <Image
-            src={hero}
-            alt="hero image"
+            src={`${process.env.STRAPI_URL}${featuredArticle.attributes.coverImage.data.attributes.url}`}
+            alt={
+              featuredArticle.attributes.coverImage.data.attributes
+                .alternativeText
+            }
             fill
+            objectFit="cover"
             className=" rounded-xl object-cover"
           />
         </div>
         <p className="text-center text-xs font-normal italic leading-none text-neutral-600 dark:text-neutral-500">
-          Exploring the mountains in Indonesia - Unsplash
+          {featuredArticle.attributes.coverImage.data.attributes.caption}
         </p>
       </div>
       <ArticleCard />
@@ -36,4 +47,6 @@ export default function Home() {
       <ArticleCard />
     </main>
   );
-}
+};
+
+export default Home;
