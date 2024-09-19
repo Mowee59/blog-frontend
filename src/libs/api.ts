@@ -47,6 +47,12 @@ export const fetchArticles = async (): Promise<Payload<Article[]>> => {
  * @returns A promise that resolves as a payload of Tags
  */
 export const fetchTags = async (): Promise<Payload<Tag[]>> => {
-  const response = await apiClient.get("/tags");
+  const response = await apiClient.get("/tags?populate=*");
   return response.data;
 };
+
+/*
+api/articles?filters[tags][name][$in]=
+
+Find articles with a specific tag anme
+*/
