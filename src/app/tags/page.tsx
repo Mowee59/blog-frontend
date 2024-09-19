@@ -10,10 +10,16 @@ const Tags: React.FC = async () => {
   const tags = tagsPayload.data;
 
   return (
-    <main className="container flex flex-col lg:max-w-screen-lg">
-      {tags.map((tag) => (
-        <TagCard id={tag.id} attributes={tag.attributes} key={tag.id}></TagCard>
-      ))}
+    <main className="container  lg:max-w-screen-lg">
+      <section className="flex flex-col items-center gap-9 px-6">
+        {tags.map((tag) => (
+          <TagCard
+            id={tag.id}
+            attributes={tag.attributes}
+            key={tag.id}
+          ></TagCard>
+        ))}
+      </section>
     </main>
   );
 };
