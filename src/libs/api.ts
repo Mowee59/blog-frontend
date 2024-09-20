@@ -61,7 +61,7 @@ export const fetchTags = async (): Promise<Payload<Tag[]>> => {
 export const fetchArticlesByTagName = async (
   tagName: string,
   params?: string,
-): Promise<Payload<Article[]>> => {
+): Promise<Payload<Partial<Article>[]>> => {
   const response = await apiClient.get(
     `/articles?filters[tags][name][$in]=${tagName}&${params ?? ""}`,
   );
