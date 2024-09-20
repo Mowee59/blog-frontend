@@ -1,7 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["localhost"], // TODO: Change for prod
+    // TODO change in prod
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
+    ],
   },
 };
 

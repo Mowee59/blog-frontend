@@ -59,6 +59,23 @@ export const fetchHomePageData = async (): Promise<Payload<BlogHomePage>> => {
  * @returns A promise that resolves as a payload of Tags
  */
 export const fetchTags = async (): Promise<Payload<Tag[]>> => {
-  const response = await apiClient.get("/tags");
+  const response = await apiClient.get("/tags?populate=*");
+  return response.data;
+};
+
+/**
+ * Fetch all the articles associated with a specific tag name
+ *
+ * @param tagName Name of the tag
+ * @params Optional parameters to add to te query
+ * @returns
+ */
+export const fetchArticlesByTagName = async (
+  tagName: string,
+  params?: string,
+): Promise<Payload<Partial<Article>[]>> => {
+  const response = await apiClient.get(
+    `/articles?filters[tags][name][$in]=${tagName}&${params ?? ""}`,
+  );
   return response.data;
 };
