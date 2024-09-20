@@ -11,12 +11,9 @@ const Tags: React.FC = async () => {
 
   return (
     <main className="container  lg:max-w-screen-lg">
-      <section className="flex flex-col items-center gap-9 px-6">
+      <section className="flex flex-col items-center gap-9 px-6 sm:grid sm:grid-cols-2 sm:gap-10 lg:grid-cols-3">
         {tags.map((tag) => (
-          <TagCard
-            tag={tag}
-            key={tag.id}
-          ></TagCard>
+          <TagCard tag={tag} key={tag.id}></TagCard>
         ))}
       </section>
     </main>
