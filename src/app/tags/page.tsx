@@ -14,8 +14,7 @@ const Tags: React.FC = async () => {
       <section className="flex flex-col items-center gap-9 px-6">
         {tags.map((tag) => (
           <TagCard
-            id={tag.id}
-            attributes={tag.attributes}
+            tag={tag}
             key={tag.id}
           ></TagCard>
         ))}
