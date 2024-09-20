@@ -31,8 +31,7 @@ const TagCard = async (props: TagCardProps) => {
           fill
           placeholder="blur"
           blurDataURL={`${process.env.STRAPI_URL}${coverImageAttributes.previewUrl}`}
-          objectFit="cover"
-          className=" rounded-xl"
+          className=" rounded-xl object-cover"
         ></Image>
       </div>
       <div className="flex flex-col gap-1">
