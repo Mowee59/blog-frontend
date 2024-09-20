@@ -3,6 +3,9 @@ import Image from "next/image";
 import placeholder from "/public/svg/ph.jpg";
 
 const ArticleCard = () => {
+
+  
+
   return (
     <article className=" cursor-pointer @container">
       <div className="flex justify-center gap-5 @lg:gap-8 @3xl:gap-12">

@@ -51,8 +51,19 @@ export const fetchTags = async (): Promise<Payload<Tag[]>> => {
   return response.data;
 };
 
-/*
-api/articles?filters[tags][name][$in]=
-
-Find articles with a specific tag anme
-*/
+/**
+ * Fetch all the articles associated with a specific tag name
+ *
+ * @param tagName Name of the tag
+ * @params Optional parameters to add to te query
+ * @returns
+ */
+export const fetchArticlesByTagName = async (
+  tagName: string,
+  params?: string,
+): Promise<Payload<Article[]>> => {
+  const response = await apiClient.get(
+    `/articles?filters[tags][name][$in]=${tagName}&${params ?? ""}`,
+  );
+  return response.data;
+};
