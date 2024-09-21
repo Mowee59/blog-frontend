@@ -35,7 +35,7 @@ export const fetchArticles = async ({
   // TODO: Add axios typed response
 
   //Noumber of articles per page
-  const pageSize = 2;
+  const pageSize = 1;
   const response = await apiClient.get(
     `/articles?pagination[pageSize]=${pageSize}&pagination[page]=${pageParam}&populate=*`,
   );

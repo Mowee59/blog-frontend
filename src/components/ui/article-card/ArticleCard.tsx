@@ -30,7 +30,7 @@ const ArticleCard = (props: ArticleCardProps) => {
             </span>
             <div className="inline-block ">
               {tags.map((tag) => (
-                <span className="mr-1 hover:underline">
+                <span key={tag.id} className="mr-1 hover:underline">
                   {"#" + tag.attributes.name + " "}
                 </span>
               ))}
@@ -43,7 +43,10 @@ const ArticleCard = (props: ArticleCardProps) => {
         <div className="relative  hidden h-[120px] w-[160px] flex-shrink-0 @md:block">
           <Image
             src={coverImageThumbnail.url}
-            alt="Image article"
+            alt={
+              props.article.attributes.coverImage.data.attributes
+                .alternativeText
+            }
             fill
             className=" rounded "
           />
