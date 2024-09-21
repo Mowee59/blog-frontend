@@ -19,10 +19,9 @@ export const apiClient = axios.create({
 });
 
 /**
- * Fetch all the articles with pagination
- * Page size
  *
- * @returns A promise that resolves as a payload of Articles
+ * @param Options An object with the page param that defines the current page
+ * @returns
  */
 export const fetchArticles = async ({
   pageParam,
@@ -34,8 +33,11 @@ export const fetchArticles = async ({
   nextPage: number | null;
 }> => {
   // TODO: Add axios typed response
+
+  //Noumber of articles per page
+  const pageSize = 2;
   const response = await apiClient.get(
-    `/articles?pagination[pageSize]=1&pagination[page]=${pageParam}`,
+    `/articles?pagination[pageSize]=${pageSize}&pagination[page]=${pageParam}&populate=*`,
   );
   return {
     data: response.data,
