@@ -19,18 +19,18 @@ const TagCard = async (props: TagCardProps) => {
   // We are adding  the 'fields[0]' query parameter to filter all list car we are only interested in metadata ( to get the number of articles related to the tag)
   const articles = await fetchArticlesByTagName(
     props.tag.attributes.name,
-    "fields[0]",
+    "fields[0]=title",
   );
 
   return (
     <article className="flex h-[225px] w-full flex-col gap-5">
       <div className="relative h-[150px]">
         <Image
-          src={`${process.env.STRAPI_URL}${coverImageThumbnail.url}`}
+          src={`${coverImageThumbnail.url}`}
           alt={coverImageAttributes.alternativeText}
           fill
           placeholder="blur"
-          blurDataURL={`${process.env.STRAPI_URL}${coverImageAttributes.previewUrl}`}
+          blurDataURL={`${coverImageAttributes.previewUrl}`}
           className=" rounded-xl object-cover"
         ></Image>
       </div>

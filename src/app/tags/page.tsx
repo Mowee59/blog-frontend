@@ -1,6 +1,7 @@
 import React from "react";
 import { fetchArticles, fetchTags } from "@/libs/api";
 import TagCard from "@/components/ui/tag-card/TagCard";
+import ArticleList from "@/components/ui/article-list/ArticleList";
 
 const Tags: React.FC = async () => {
   // Fetching all the tags
@@ -15,6 +16,7 @@ const Tags: React.FC = async () => {
         {tags.map((tag) => (
           <TagCard tag={tag} key={tag.id}></TagCard>
         ))}
+        <ArticleList />
       </section>
     </main>
   );

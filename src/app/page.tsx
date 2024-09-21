@@ -28,7 +28,7 @@ const Home = async () => {
         <div className="relative mx-auto  mb-4 h-[340px] w-full lg:h-[500px] ">
           <Image
             // Image url structure is : strapiUrl/uplooads/image
-            src={`${process.env.STRAPI_URL}${featuredImage?.attributes.url}`}
+            src={`${featuredImage?.attributes.url}`}
             alt={featuredImage?.attributes.alternativeText || "cover image"}
             fill
             objectFit="cover"

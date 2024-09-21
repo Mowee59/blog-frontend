@@ -7,7 +7,7 @@ import axios from "axios";
 // Creating axios instance
 const apiClient = axios.create({
   // Fetching API url from env variables
-  baseURL: process.env.STRAPI_API_URL,
+  baseURL: process.env.API_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -38,7 +38,7 @@ apiClient.interceptors.request.use(
  */
 export const fetchArticles = async (): Promise<Payload<Article[]>> => {
   // TODO: Add axios typed response
-  const response = await apiClient.get("/articles");
+  const response = await apiClient.get("/articles?pagination[pageSize]=1");
   return response.data;
 };
 
@@ -49,7 +49,9 @@ export const fetchArticles = async (): Promise<Payload<Article[]>> => {
  */
 export const fetchHomePageData = async (): Promise<Payload<BlogHomePage>> => {
   // TODO: Add axios typed response
-  const response = await apiClient.get("/blog-home-page?populate[featuredArticle][populate][0]=coverImage");
+  const response = await apiClient.get(
+    "/blog-home-page?populate[featuredArticle][populate][0]=coverImage",
+  );
   return response.data;
 };
 
