@@ -1,5 +1,5 @@
 import React from "react";
-import { fetchArticles, fetchTags } from "@/libs/api";
+import { fetchArticles, fetchTags } from "@/libs/axiosServer";
 import TagCard from "@/components/ui/tag-card/TagCard";
 import ArticleList from "@/components/ui/article-list/ArticleList";
 

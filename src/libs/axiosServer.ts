@@ -4,6 +4,12 @@ import { Payload } from "@/interfaces/Payload";
 import { Tag } from "@/interfaces/tag";
 import axios from "axios";
 
+/**
+ *
+ * This file is used to define api request that will be used for server side requests
+ *
+ */
+
 // Creating axios instance
 const apiClient = axios.create({
   // Fetching API url from env variables
@@ -13,23 +19,23 @@ const apiClient = axios.create({
   },
 });
 
-// Add Axios interceptor for adding the authorization token
-apiClient.interceptors.request.use(
-  (config) => {
-    // Access the token from the environment variable
-    const token = process.env.STRAPI_API_TOKEN;
+// // Add Axios interceptor for adding the authorization token
+// apiClient.interceptors.request.use(
+//   (config) => {
+//     // Access the token from the environment variable
+//     const token = process.env.STRAPI_API_TOKEN;
 
-    if (token) {
-      // Add the token to the Authorization header if it exists
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+//     if (token) {
+//       // Add the token to the Authorization header if it exists
+//       config.headers.Authorization = `Bearer ${token}`;
+//     }
 
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  },
-);
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   },
+// );
 
 /**
  * Fetch all the articles

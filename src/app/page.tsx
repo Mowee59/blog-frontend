@@ -1,7 +1,7 @@
 import ArticleCard from "@/components/ui/article-card/ArticleCard";
 import Image from "next/image";
 import hero from "/public/svg/hero.jpg";
-import { fetchHomePageData } from "@/libs/api";
+import { fetchHomePageData } from "@/libs/axiosServer";
 
 const Home = async () => {
   //Gettting the home page data

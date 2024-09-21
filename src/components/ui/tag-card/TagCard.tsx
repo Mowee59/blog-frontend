@@ -1,7 +1,7 @@
 import { Tag } from "@/interfaces/tag";
 import React from "react";
 import Image from "next/image";
-import { fetchArticlesByTagName } from "@/libs/api";
+import { fetchArticlesByTagName } from "@/libs/axiosServer";
 
 //Typing the component props
 type TagCardProps = {
