@@ -9,7 +9,14 @@ import { useInView } from "react-intersection-observer";
 
 const ArticleList = () => {
   // Infinite query hook from react-query library
-  const { data, status, error, fetchNextPage } = useInfiniteQuery({
+  const {
+    data,
+    status,
+    error,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+  } = useInfiniteQuery({
     queryKey: ["articles"],
     queryFn: fetchArticles,
     initialPageParam: 1,
@@ -27,32 +34,44 @@ const ArticleList = () => {
   }, [inView, fetchNextPage]);
 
   return status === "pending" ? (
-    <div className="bg-orange-800">Loading</div>
+    <div className="mx-auto h-20 w-20 animate-spin rounded-full border-8 border-gray-300 border-t-blue-600" />
   ) : status === "error" ? (
     <div>{error.message}</div>
   ) : (
-    <div className="flex w-full flex-col gap-10">
-      {
-        // Iterating throug pages
-        data.pages.map((page) => {
-          // Assigning the list of articles of the current page to a variable
-          const articles = page.data.data;
-          return (
-            <>
-              {
-                // Iterating through articles of the current page and displaying them
-                articles.map((article) => {
-                  return <ArticleCard key={article.id} article={article} />;
-                })
-              }
-            </>
-          );
-        })
-      }
+    <>
+      <div className="flex w-full flex-col gap-8 md:gap-12">
+        {
+          // Iterating throug pages
+          data.pages.map((page) => {
+            // Assigning the list of articles of the current page to a variable
+            const articles = page.data.data;
+            return (
+              <>
+                {
+                  // Iterating through articles of the current page and displaying them
+                  articles.map((article) => {
+                    return <ArticleCard key={article.id} article={article} />;
+                  })
+                }
+              </>
+            );
+          })
+        }
+      </div>
 
       {/* Div used to trigger fetching of the next page using intersection observer*/}
-      <div ref={ref}></div>
-    </div>
+      <div ref={ref} className="mx-auto">
+        {isFetchingNextPage && (
+          <div className="h-20 w-20 animate-spin rounded-full border-8 border-gray-300 border-t-blue-600" />
+        )}
+      </div>
+
+      {!hasNextPage && (
+        <div className="text-center text-neutral-400">
+          Plus d'articles a charger
+        </div>
+      )}
+    </>
   );
 };
 

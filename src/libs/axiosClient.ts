@@ -35,13 +35,17 @@ export const fetchArticles = async ({
   // TODO: Add axios typed response
 
   //Noumber of articles per page
-  const pageSize = 1;
+  const pageSize = 2;
   const response = await apiClient.get(
     `/articles?pagination[pageSize]=${pageSize}&pagination[page]=${pageParam}&populate=*`,
   );
   return {
     data: response.data,
     currentPage: pageParam,
-    nextPage: pageParam + 1,
+    // if the number of pages is greate that the current apge, next page is current page + 1 otherwise we return null
+    nextPage:
+      response.data.meta.pagination.pageCount > pageParam
+        ? pageParam + 1
+        : null,
   };
 };

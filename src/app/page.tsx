@@ -2,6 +2,7 @@ import ArticleCard from "@/components/ui/article-card/ArticleCard";
 import Image from "next/image";
 import hero from "/public/svg/hero.jpg";
 import { fetchHomePageData } from "@/libs/axiosServer";
+import ArticleList from "@/components/ui/article-list/ArticleList";
 
 const Home = async () => {
   //Gettting the home page data
@@ -39,11 +40,7 @@ const Home = async () => {
           {featuredImage?.attributes.caption}
         </p>
       </div>
-      <ArticleCard />
-      <ArticleCard />
-      <ArticleCard />
-      <ArticleCard />
-      <ArticleCard />
+      <ArticleList />
     </main>
   );
 };

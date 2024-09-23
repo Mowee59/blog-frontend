@@ -20,7 +20,7 @@ const ArticleCard = (props: ArticleCardProps) => {
 
   return (
     <article className=" cursor-pointer @container">
-      <div className="flex h-[120px] justify-center gap-5  @lg:gap-8 @3xl:gap-12">
+      <div className="flex h-fit justify-center gap-5 @lg:gap-8  @3xl:gap-12 md:h-[120px]">
         <div className="">
           <h3 className=" mb-3 text-xs font-medium leading-3 text-neutral-600 @lg:mb-4 dark:text-neutral-400">
             {`${publicationDate?.getDate()} `}

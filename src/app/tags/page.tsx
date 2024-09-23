@@ -17,9 +17,6 @@ const Tags: React.FC = async () => {
           <TagCard tag={tag} key={tag.id}></TagCard>
         ))}
       </section>
-      <section className="container  lg:max-w-screen-lg">
-        <ArticleList />
-      </section>
     </main>
   );
 };
