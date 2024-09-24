@@ -38,9 +38,9 @@ export const fetchArticles: QueryFunction<
 }: QueryFunctionContext<[string, string], number>) => {
   // TODO: Add axios typed response
 
-  const [_key, queryParams] = queryKey;
+  const [_key, queryParams = ''] = queryKey;
   const response = await apiClient.get(
-    `/articles?pagination[pageSize]=${PAGE_SIZE}&pagination[page]=${pageParam}&populate=*`,
+    `/articles?pagination[pageSize]=${PAGE_SIZE}&pagination[page]=${pageParam}&populate=*&${queryParams}`,
   );
   return {
     data: response.data,

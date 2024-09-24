@@ -7,10 +7,10 @@ import ArticleCard from "../article-card/ArticleCard";
 import { useInView } from "react-intersection-observer";
 
 type ArticleListProps = {
-  queryParams: string | undefined;
+  queryParams?: string;
 };
 
-const ArticleList = ({queryParams = ''} : ArticleListProps) => {
+const ArticleList = ({ queryParams = "" }: ArticleListProps) => {
   // Infinite query hook from react-query library
   const {
     data,
@@ -20,8 +20,8 @@ const ArticleList = ({queryParams = ''} : ArticleListProps) => {
     isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ["articles", queryParams ],
-    queryFn:  fetchArticles,
+    queryKey: ["articles", queryParams],
+    queryFn: fetchArticles,
     initialPageParam: 1,
     // TODO get the type right in articles type
     getNextPageParam: (lastPage) => lastPage.nextPage,
