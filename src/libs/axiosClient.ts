@@ -9,6 +9,11 @@ import { Article } from "@/interfaces/article";
 import { BlogHomePage } from "@/interfaces/blog-home-page";
 import { Payload } from "@/interfaces/Payload";
 import { Tag } from "@/interfaces/tag";
+import { QueryFunction, QueryFunctionContext } from "@tanstack/react-query";
+import { infiniteQueryFormatedData } from "@/interfaces/infiniteQueryFormatedData";
+
+//Number of article per page
+const PAGE_SIZE = 2;
 
 export const apiClient = axios.create({
   // Fetching API url from env variables
@@ -23,21 +28,19 @@ export const apiClient = axios.create({
  * @param Options An object with the page param that defines the current page
  * @returns
  */
-export const fetchArticles = async ({
-  pageParam,
-}: {
-  pageParam: number;
-}): Promise<{
-  data: Payload<Article[]>;
-  currentPage: number;
-  nextPage: number | null;
-}> => {
+export const fetchArticles: QueryFunction<
+  infiniteQueryFormatedData,
+  [string, string],
+  number
+> = async ({
+  pageParam = 1,
+  queryKey,
+}: QueryFunctionContext<[string, string], number>) => {
   // TODO: Add axios typed response
 
-  //Noumber of articles per page
-  const pageSize = 2;
+  const [_key, queryParams] = queryKey;
   const response = await apiClient.get(
-    `/articles?pagination[pageSize]=${pageSize}&pagination[page]=${pageParam}&populate=*`,
+    `/articles?pagination[pageSize]=${PAGE_SIZE}&pagination[page]=${pageParam}&populate=*`,
   );
   return {
     data: response.data,

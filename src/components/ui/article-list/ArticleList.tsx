@@ -1,13 +1,16 @@
 "use client";
 
-import React, { MouseEventHandler, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchArticles } from "@/libs/axiosClient";
-import { stat } from "fs";
 import ArticleCard from "../article-card/ArticleCard";
 import { useInView } from "react-intersection-observer";
 
-const ArticleList = () => {
+type ArticleListProps = {
+  queryParams: string | undefined;
+};
+
+const ArticleList = ({queryParams = ''} : ArticleListProps) => {
   // Infinite query hook from react-query library
   const {
     data,
@@ -17,8 +20,8 @@ const ArticleList = () => {
     isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ["articles"],
-    queryFn: fetchArticles,
+    queryKey: ["articles", queryParams ],
+    queryFn:  fetchArticles,
     initialPageParam: 1,
     // TODO get the type right in articles type
     getNextPageParam: (lastPage) => lastPage.nextPage,

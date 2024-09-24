@@ -2,7 +2,7 @@ import { Article } from "@/interfaces/article";
 import { BlogHomePage } from "@/interfaces/blog-home-page";
 import { Payload } from "@/interfaces/Payload";
 import { Tag } from "@/interfaces/tag";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 /**
  *
@@ -44,7 +44,7 @@ const apiClient = axios.create({
  */
 export const fetchArticles = async (): Promise<Payload<Article[]>> => {
   // TODO: Add axios typed response
-  const response = await apiClient.get("/articles?pagination[pageSize]=1");
+  const response: AxiosResponse<Payload<Article[]>> = await apiClient.get("/articles?pagination[pageSize]=1");
   return response.data;
 };
 
