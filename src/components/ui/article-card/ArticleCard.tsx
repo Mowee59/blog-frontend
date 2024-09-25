@@ -1,10 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import placeholder from "/public/svg/ph.jpg";
-import { Article } from "@/interfaces/article";
+import { Article, Article_Preview } from "@/interfaces/article";
 
 type ArticleCardProps = {
-  article: Article;
+  article: Article_Preview;
 };
 
 const ArticleCard = (props: ArticleCardProps) => {
@@ -20,9 +19,9 @@ const ArticleCard = (props: ArticleCardProps) => {
 
   return (
     <article className=" cursor-pointer @container">
-      <div className="flex h-fit justify-center gap-5 @lg:gap-8  @3xl:gap-12 md:h-[120px]">
+      <div className="flex h-fit  w-full min-w-full justify-between gap-5 @lg:gap-8 @3xl:gap-12 md:h-[120px]">
         <div className="">
-          <h3 className=" mb-3 text-xs font-medium leading-3 text-neutral-600 @lg:mb-4 dark:text-neutral-400">
+          <h3 className=" mb-3 text-xs font-medium leading-3 text-neutral-600 @lg:mb-2 dark:text-neutral-400">
             {`${publicationDate?.getDate()} `}
             <span className="text-transform: capitalize">
               {`${publicationDate?.toLocaleDateString("FR-fr", { month: "short" }).slice(0, -2)} `}
@@ -36,7 +35,10 @@ const ArticleCard = (props: ArticleCardProps) => {
               ))}
             </div>
           </h3>
-          <p className="  line-clamp-3 max-h-full text-sm font-medium leading-tight  text-neutral-800 dark:text-neutral-300 sm:text-base sm:leading-normal lg:text-lg lg:leading-relaxed">
+          <h2 className="  max-h-full text-xl font-semibold  leading-tight text-neutral-800 dark:text-neutral-300 sm:text-base sm:leading-normal lg:text-lg lg:leading-relaxed">
+            {props.article.attributes.title}
+          </h2>
+          <p className="line-clamp-2  max-h-full text-sm font-medium  leading-tight text-neutral-800 dark:text-neutral-300 sm:text-base sm:leading-normal lg:text-lg lg:leading-relaxed">
             {props.article.attributes.description}
           </p>
         </div>

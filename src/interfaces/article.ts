@@ -53,3 +53,15 @@ export interface Article_NoRelations {
   locale: string;
   localizations?: Article[];
 }
+
+export interface Article_Preview {
+  id: number;
+  attributes: {
+    publishedAt: Date;
+    title: string;
+    coverImage: { data: Media };
+    slug: string;
+    description: string;
+    tags: { data: Tag[] };
+  };
+}

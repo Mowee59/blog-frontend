@@ -6,10 +6,18 @@ import { fetchArticles } from "@/libs/axiosClient";
 import ArticleCard from "../article-card/ArticleCard";
 import { useInView } from "react-intersection-observer";
 
+// Type definition of the props
 type ArticleListProps = {
   queryParams?: string;
 };
 
+/**
+ * A component that fetch and display a list of articles. It lazy laods them and display them in an infinite query style
+ *
+ *
+ * @param Props Query params is optional and represents additional arguments to the query, if not set, all articles will be fetch
+ * @returns
+ */
 const ArticleList = ({ queryParams = "" }: ArticleListProps) => {
   // Infinite query hook from react-query library
   const {
@@ -19,6 +27,7 @@ const ArticleList = ({ queryParams = "" }: ArticleListProps) => {
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
+    isFetching,
   } = useInfiniteQuery({
     queryKey: ["articles", queryParams],
     queryFn: fetchArticles,
@@ -30,33 +39,38 @@ const ArticleList = ({ queryParams = "" }: ArticleListProps) => {
   // Intersection observer Hook
   const { ref, inView } = useInView();
 
+  // We use an effect to fetch next page of articles when boolean inView is true
   useEffect(() => {
     if (inView) {
-      fetchNextPage();
+      // According to the doc
+      !isFetching && fetchNextPage();
     }
-  }, [inView, fetchNextPage]);
+  }, [inView, fetchNextPage, isFetching]);
 
   return status === "pending" ? (
+    // IF status is "pending" (no data yet), we dispay the loading spinner
     <div className="mx-auto h-20 w-20 animate-spin rounded-full border-8 border-gray-300 border-t-blue-600" />
   ) : status === "error" ? (
+    //If status is error, we display the error message
     <div>{error.message}</div>
   ) : (
+    // If status is neither pending nor error, we can assule it's "success"
     <>
-      <div className="flex w-full flex-col gap-8 md:gap-12">
+      <div className="flex w-full flex-col md:gap-12 ">
         {
           // Iterating throug pages
-          data.pages.map((page) => {
+          data.pages.map((page, key) => {
             // Assigning the list of articles of the current page to a variable
             const articles = page.data.data;
             return (
-              <>
+              <div key={key} className="flex flex-col gap-8 md:gap-12 ">
                 {
                   // Iterating through articles of the current page and displaying them
                   articles.map((article) => {
                     return <ArticleCard key={article.id} article={article} />;
                   })
                 }
-              </>
+              </div>
             );
           })
         }
@@ -71,7 +85,7 @@ const ArticleList = ({ queryParams = "" }: ArticleListProps) => {
 
       {!hasNextPage && (
         <div className="text-center text-neutral-400">
-          Plus d'articles a charger
+          Plus d&apos;articles a charger
         </div>
       )}
     </>

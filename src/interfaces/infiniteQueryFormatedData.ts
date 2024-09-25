@@ -6,10 +6,10 @@
  */
 
 import { Payload } from "./Payload";
-import { Article } from "./article";
+import { Article, Article_Preview } from "./article";
 
 export interface infiniteQueryFormatedData {
-  data: Payload<Article[]>;
+  data: Payload<Article_Preview[]>;
   currentPage: number;
   nextPage: number | null;
 }
