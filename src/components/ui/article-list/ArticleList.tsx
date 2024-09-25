@@ -83,11 +83,14 @@ const ArticleList = ({ queryParams = "" }: ArticleListProps) => {
         )}
       </div>
 
-      {!hasNextPage && (
-        <div className="text-center text-neutral-400">
-          Plus d&apos;articles a charger
-        </div>
-      )}
+      {
+        // If there's not any page more to laod we display a message
+        !hasNextPage && (
+          <div className="text-center text-neutral-400">
+            Plus d&apos;articles a charger
+          </div>
+        )
+      }
     </>
   );
 };
