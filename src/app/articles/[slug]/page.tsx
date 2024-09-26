@@ -24,6 +24,7 @@ export const revalidate = 600;
 export const dynamicParams = true;
 
 const page = async ({ params }: { params: { slug: string } }) => {
+
   // Retrieving the article as an axios payload
   const articlePayload = await fetchArticleBySlug(params.slug);
 
