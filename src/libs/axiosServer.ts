@@ -44,7 +44,9 @@ const apiClient = axios.create({
  */
 export const fetchArticles = async (): Promise<Payload<Article[]>> => {
   // TODO: Add axios typed response
-  const response: AxiosResponse<Payload<Article[]>> = await apiClient.get("/articles?pagination[pageSize]=1");
+  const response: AxiosResponse<Payload<Article[]>> = await apiClient.get(
+    "/articles?pagination[pageSize]=1",
+  );
   return response.data;
 };
 
@@ -84,6 +86,20 @@ export const fetchArticlesByTagName = async (
 ): Promise<Payload<Partial<Article>[]>> => {
   const response = await apiClient.get(
     `/articles?filters[tags][name][$in]=${tagName}&${params ?? ""}`,
+  );
+  return response.data;
+};
+/**
+ * Fetch an article by slug
+ *
+ * @param slug the slug of the article to retrieve
+ * @returns A promise that resolves as a Payload containing a unique article
+ */
+export const fetchArticleBySlug = async (
+  slug: string,
+): Promise<Payload<Article[]>> => {
+  const response = await apiClient.get(
+    `/articles?filters[slug][$eqi]=${slug}&populate=*`,
   );
   return response.data;
 };

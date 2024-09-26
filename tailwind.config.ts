@@ -17,6 +17,7 @@ const config: Config = {
   plugins: [
     require("@tailwindcss/typography"),
     require("@tailwindcss/container-queries"),
+    require("@tailwindcss/typography"),
   ],
   // Used to allow theme swhtiching by class name
   darkMode: "class",
