@@ -14,6 +14,7 @@ export interface Tag {
     name: string;
     cover: { data: Media };
     articles?: { data: Article[] };
+    description?: string;
     locale: string;
     localizations?: { data: Tag[] };
   };
@@ -26,6 +27,7 @@ export interface Tag_Plain {
   name: string;
   cover: Media_Plain;
   articles?: Article_Plain[];
+  description?: string;
   locale: string;
   localizations?: Tag_Plain[];
 }
@@ -38,7 +40,7 @@ export interface Tag_NoRelations {
   name: string;
   cover: number;
   articles?: number[];
+  description?: string;
   locale: string;
   localizations?: Tag[];
 }
-
