@@ -45,7 +45,7 @@ const apiClient = axios.create({
 export const fetchArticles = async (): Promise<Payload<Article[]>> => {
   // TODO: Add axios typed response
   const response: AxiosResponse<Payload<Article[]>> = await apiClient.get(
-    "/articles?pagination[pageSize]=1",
+    "/articles?status=published",
   );
   return response.data;
 };
