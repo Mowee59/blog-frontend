@@ -80,7 +80,9 @@ export const fetchTags = async (): Promise<Payload<Tag[]>> => {
  * @returns A promise that resolves as a Payload Tags
  */
 export const fetchTagByName = async (name: string): Promise<Payload<Tag[]>> => {
-  const response = await apiClient.get(`/tags?filters[name][$eqi]=${name}`);
+  const response = await apiClient.get(
+    `/tags?filters[name][$eqi]=${name}&populate=*`,
+  );
   return response.data;
 };
 
