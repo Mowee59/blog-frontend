@@ -7,6 +7,8 @@ type ArticleCardProps = {
   article: Article_Preview;
 };
 
+// TODO Add extended markdown support
+
 const ArticleCard = (props: ArticleCardProps) => {
   // Asssigning the thumbnail to a varialbe
   const coverImageThumbnail =

@@ -32,7 +32,6 @@ const Home = async () => {
             src={`${featuredImage?.attributes.url}`}
             alt={featuredImage?.attributes.alternativeText || "cover image"}
             fill
-            objectFit="cover"
             className=" rounded-xl object-cover"
           />
         </div>
