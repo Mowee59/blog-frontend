@@ -24,24 +24,27 @@ const TagCard = async (props: TagCardProps) => {
   );
 
   return (
-    <Link href={`/tags/${props.tag.attributes.name}`}>
-      <article className="flex h-[225px] w-full flex-col gap-5">
-        <div className="relative h-[150px]">
-          <Image
-            src={`${coverImageThumbnail.url}`}
-            alt={coverImageAttributes.alternativeText}
-            fill
-            placeholder="blur"
-            blurDataURL={`${coverImageAttributes.previewUrl}`}
-            className=" rounded-xl object-cover"
-          ></Image>
+    <article className="flex h-[225px] w-full flex-col gap-5">
+      <Link href={`/tags/${props.tag.attributes.name}`}>
+        <div>
+          <div className="relative h-[150px]">
+            <Image
+              src={`${coverImageThumbnail.url}`}
+              alt={coverImageAttributes.alternativeText}
+              fill
+              placeholder="blur"
+              blurDataURL={`${coverImageAttributes.previewUrl}`}
+              className=" rounded-xl object-cover"
+            ></Image>
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <h3 className="text-xl font-medium leading-snug text-neutral-900 dark:text-neutral-300">{`#${props.tag.attributes.name}`}</h3>
+            <h4 className="text-sm font-medium leading-4 text-[#3d3d3d] dark:text-neutral-400">{`${articles.meta.pagination?.total} posts`}</h4>
+          </div>
         </div>
-        <div className="flex flex-col gap-1">
-          <h3 className="text-xl font-medium leading-snug text-neutral-900 dark:text-neutral-300">{`#${props.tag.attributes.name}`}</h3>
-          <h4 className="text-sm font-medium leading-4 text-[#3d3d3d] dark:text-neutral-400">{`${articles.meta.pagination?.total} posts`}</h4>
-        </div>
-      </article>
-    </Link>
+      </Link>
+    </article>
   );
 };
 

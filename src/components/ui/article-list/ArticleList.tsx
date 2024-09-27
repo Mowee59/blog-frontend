@@ -37,7 +37,9 @@ const ArticleList = ({ queryParams = "" }: ArticleListProps) => {
   });
 
   // Intersection observer Hook
-  const { ref, inView } = useInView();
+  const { ref, inView } = useInView({
+    rootMargin: "-25%",
+  });
 
   // We use an effect to fetch next page of articles when boolean inView is true
   useEffect(() => {
@@ -77,14 +79,14 @@ const ArticleList = ({ queryParams = "" }: ArticleListProps) => {
       </div>
 
       {/* Div used to trigger fetching of the next page using intersection observer*/}
-      <div ref={ref} className="mx-auto">
+      <div ref={ref} className="">
         {isFetchingNextPage && (
-          <div className="h-20 w-20 animate-spin rounded-full border-8 border-gray-300 border-t-blue-600" />
+          <div className="mx-auto h-20 w-20 animate-spin rounded-full border-8 border-gray-300 border-t-blue-600" />
         )}
       </div>
 
       {
-        // If there's not any page more to laod we display a message  
+        // If there's not any page more to laod we display a message
         !hasNextPage && (
           <div className="text-center text-neutral-400">
             Plus d&apos;articles a charger

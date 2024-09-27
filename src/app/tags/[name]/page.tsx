@@ -59,9 +59,11 @@ const page = async ({ params }: { params: { name: string } }) => {
           {coverImage.attributes.caption}
         </p>
       </div>
-      <ArticleList
-        queryParams={`filters[tags][name][$in]=${tag.attributes.name}`}
-      />
+      <div className=" lg:px-10 xl:px-20">
+        <ArticleList
+          queryParams={`filters[tags][name][$in]=${tag.attributes.name}`}
+        />
+      </div>
     </main>
   );
 };

@@ -10,7 +10,7 @@ const Home = async () => {
 
   // Assigning the featuresd article to a variable for better readability
   const featuredArticle = fetchedData.data.attributes.featuredArticle?.data;
-
+  // TODO Make featuredARticle required
   // Assigning the featuresd article's image to a variable for better readability
   const featuredImage = featuredArticle?.attributes.coverImage.data;
 
@@ -31,6 +31,7 @@ const Home = async () => {
             // Image url structure is : strapiUrl/uplooads/image
             src={`${featuredImage?.attributes.url}`}
             alt={featuredImage?.attributes.alternativeText || "cover image"}
+            sizes="100vw"
             fill
             className=" rounded-xl object-cover"
           />
@@ -39,7 +40,9 @@ const Home = async () => {
           {featuredImage?.attributes.caption}
         </p>
       </div>
-      <ArticleList />
+      <div className=" lg:px-10 xl:px-20">
+        <ArticleList />
+      </div>
     </main>
   );
 };
