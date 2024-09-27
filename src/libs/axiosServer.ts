@@ -74,6 +74,17 @@ export const fetchTags = async (): Promise<Payload<Tag[]>> => {
 };
 
 /**
+ * Fetch a tag by its name
+ *
+ * @param name the name of the tag
+ * @returns A promise that resolves as a Payload Tags
+ */
+export const fetchTagByName = async (name: string): Promise<Payload<Tag[]>> => {
+  const response = await apiClient.get(`/tags?filters[name][$eqi]=${name}`);
+  return response.data;
+};
+
+/**
  * Fetch all the articles associated with a specific tag name
  *
  * @param tagName Name of the tag
@@ -89,6 +100,7 @@ export const fetchArticlesByTagName = async (
   );
   return response.data;
 };
+
 /**
  * Fetch an article by slug
  *
