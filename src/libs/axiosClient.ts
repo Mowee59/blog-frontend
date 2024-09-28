@@ -11,17 +11,11 @@ import { Payload } from "@/interfaces/Payload";
 import { Tag } from "@/interfaces/tag";
 import { QueryFunction, QueryFunctionContext } from "@tanstack/react-query";
 import { infiniteQueryFormatedData } from "@/interfaces/infiniteQueryFormatedData";
+import { apiClient } from './axiosConfig';
 
 //Number of article per page
 const PAGE_SIZE = 2;
 
-export const apiClient = axios.create({
-  // Fetching API url from env variables
-  baseURL: "/api",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
 
 /**
  *

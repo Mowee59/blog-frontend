@@ -3,6 +3,7 @@ import { BlogHomePage } from "@/interfaces/blog-home-page";
 import { Payload } from "@/interfaces/Payload";
 import { Tag } from "@/interfaces/tag";
 import axios, { AxiosResponse } from "axios";
+import { apiServer } from "./axiosConfig";
 
 /**
  *
@@ -10,14 +11,7 @@ import axios, { AxiosResponse } from "axios";
  *
  */
 
-// Creating axios instance
-const apiClient = axios.create({
-  // Fetching API url from env variables
-  baseURL: process.env.API_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+
 
 // // Add Axios interceptor for adding the authorization token
 // apiClient.interceptors.request.use(
@@ -44,7 +38,7 @@ const apiClient = axios.create({
  */
 export const fetchArticles = async (): Promise<Payload<Article[]>> => {
   // TODO: Add axios typed response
-  const response: AxiosResponse<Payload<Article[]>> = await apiClient.get(
+  const response: AxiosResponse<Payload<Article[]>> = await apiServer.get(
     "/articles?status=published",
   );
   return response.data;
@@ -57,7 +51,7 @@ export const fetchArticles = async (): Promise<Payload<Article[]>> => {
  */
 export const fetchHomePageData = async (): Promise<Payload<BlogHomePage>> => {
   // TODO: Add axios typed response
-  const response = await apiClient.get(
+  const response = await apiServer.get(
     "/blog-home-page?populate[featuredArticle][populate][0]=coverImage",
   );
   return response.data;
@@ -69,7 +63,7 @@ export const fetchHomePageData = async (): Promise<Payload<BlogHomePage>> => {
  * @returns A promise that resolves as a payload of Tags
  */
 export const fetchTags = async (): Promise<Payload<Tag[]>> => {
-  const response = await apiClient.get("/tags?populate=*");
+  const response = await apiServer.get("/tags?populate=*");
   return response.data;
 };
 
@@ -80,7 +74,7 @@ export const fetchTags = async (): Promise<Payload<Tag[]>> => {
  * @returns A promise that resolves as a Payload Tags
  */
 export const fetchTagByName = async (name: string): Promise<Payload<Tag[]>> => {
-  const response = await apiClient.get(
+  const response = await apiServer.get(
     `/tags?filters[name][$eqi]=${name}&populate=*`,
   );
   return response.data;
@@ -97,7 +91,7 @@ export const fetchArticlesByTagName = async (
   tagName: string,
   params?: string,
 ): Promise<Payload<Partial<Article>[]>> => {
-  const response = await apiClient.get(
+  const response = await apiServer.get(
     `/articles?filters[tags][name][$in]=${tagName}&${params ?? ""}`,
   );
   return response.data;
@@ -112,7 +106,7 @@ export const fetchArticlesByTagName = async (
 export const fetchArticleBySlug = async (
   slug: string,
 ): Promise<Payload<Article[]>> => {
-  const response = await apiClient.get(
+  const response = await apiServer.get(
     `/articles?filters[slug][$eqi]=${slug}&populate=*`,
   );
   return response.data;
