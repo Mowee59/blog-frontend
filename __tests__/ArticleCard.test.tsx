@@ -57,5 +57,10 @@ describe('ArticleCard', () => {
     expect(image).toHaveAttribute('alt', 'CoverImage');
   });
 
+  it('matches snapshot', () => {
+    const { asFragment } = render(<ArticleCard article={mockArticle} />);
+    expect(asFragment()).toMatchSnapshot();
+  });
+
   // Add more tests as needed
 });

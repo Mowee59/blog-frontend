@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ArticleCard matches snapshot 1`] = `
+<DocumentFragment>
+  <a
+    href="/articles/article-test"
+  >
+    <article
+      class=" cursor-pointer @container"
+    >
+      <div
+        class="flex h-fit  w-full min-w-full justify-between gap-5 @lg:gap-8 @3xl:gap-12 md:h-[120px]"
+      >
+        <div
+          class=""
+        >
+          <h3
+            class=" mb-3 text-xs font-medium leading-3 text-neutral-600 @lg:mb-2 dark:text-neutral-400"
+          >
+            10 
+            <span
+              class="text-transform: capitalize"
+            >
+              sep • 
+            </span>
+            <div
+              class="inline-block "
+            >
+              <span
+                class="mr-1 hover:underline"
+              >
+                #Algorithmie 
+              </span>
+              <span
+                class="mr-1 hover:underline"
+              >
+                #Javascript 
+              </span>
+              <span
+                class="mr-1 hover:underline"
+              >
+                #React 
+              </span>
+            </div>
+          </h3>
+          <h2
+            class="  max-h-full text-xl font-semibold  leading-tight text-neutral-800 dark:text-neutral-300 sm:text-base sm:leading-normal lg:text-lg lg:leading-relaxed"
+          >
+            Article test
+          </h2>
+          <p
+            class="line-clamp-2  max-h-full text-sm font-medium  leading-tight text-neutral-800 dark:text-neutral-300 sm:text-base sm:leading-normal lg:text-lg lg:leading-relaxed"
+          >
+            This is a test article summary
+          </p>
+        </div>
+        <div
+          class="relative  hidden h-[120px] w-[160px] flex-shrink-0 @md:block"
+        >
+          <img
+            alt="CoverImage"
+            class=" rounded "
+            src="https://example.com/image.jpg"
+          />
+        </div>
+      </div>
+    </article>
+  </a>
+</DocumentFragment>
+`;
