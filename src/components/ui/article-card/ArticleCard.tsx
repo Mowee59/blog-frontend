@@ -53,7 +53,7 @@ const ArticleCard = (props: ArticleCardProps) => {
                 props.article.attributes.coverImage.data.attributes
                   .alternativeText
               }
-              fill={true}
+              fill
               className=" rounded "
             />
           </div>
