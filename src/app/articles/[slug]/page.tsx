@@ -30,12 +30,11 @@ const page = async ({ params }: { params: { slug: string } }) => {
 
   // Assigning the article data itself to a variable
   const article = articlePayload.data[0];
-
   // Creating a new Date object from the publishedAt attribute
-  const publicationDate = new Date(article.attributes.publishedAt!);
+  const publicationDate = new Date(article.attributes.publishedAt as string);
 
   // The array of tags the article is related with
-  const tags = article.attributes.tags!.data;
+  const tags = article.attributes.tags?.data ?? [];
 
   // We parse the markdown to get HTML content
   const parsedMarkdown = await markdownToHtml(article.attributes.content);

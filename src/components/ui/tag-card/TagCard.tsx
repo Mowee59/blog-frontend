@@ -28,7 +28,6 @@ const TagCard =  (props: TagCardProps) => {
               src={`${coverImageThumbnail.url}`}
               alt={coverImageAttributes.alternativeText}
               fill
-              placeholder="blur"
               className=" rounded-xl object-cover"
             ></Image>
           </div>
