@@ -19,7 +19,7 @@ const ArticleCard = (props: ArticleCardProps) => {
 
   // The array of tags the article is related with
   const tags = props.article.attributes.tags!.data;
-
+  
   return (
     <Link href={`/articles/${props.article.attributes.slug}`}>
       <article className=" cursor-pointer @container">

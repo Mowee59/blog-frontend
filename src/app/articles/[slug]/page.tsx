@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { fetchArticleBySlug, fetchArticles } from "@/libs/axiosServer";
 import markdownToHtml from "@/libs/markdownToHtml";
 import React from "react";
@@ -14,6 +15,53 @@ export async function generateStaticParams() {
     slug: article.attributes.slug,
   }));
 }
+
+
+// This function generates metadata for the article page
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  // Fetch the article data using the slug from the URL parameters
+  const articlePayload = await fetchArticleBySlug(params.slug);
+  const article = articlePayload.data[0];
+  const seo = article.attributes.seo;
+
+  // If there's no SEO data, return basic metadata
+  if (!seo) {
+    return {
+      title: article.attributes.title,
+      description: article.attributes.description,
+    };
+  }
+
+  // If SEO data exists, return a more comprehensive metadata object
+  return {
+    // Basic metadata
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+    keywords: seo.keywords,
+    robots: seo.metaRobots,
+    viewport: seo.metaViewport,
+    canonical: seo.canonicalURL,
+
+    // Open Graph metadata for social media sharing
+    openGraph: {
+      images: seo.metaImage ? [seo.metaImage.data.attributes.url] : [],
+    },
+
+    // Twitter-specific metadata
+    twitter: {
+      card: 'summary_large_image',
+      images: seo.metaTwitterImage ? [seo.metaTwitterImage.data.attributes.url] : [],
+    },
+
+    // Include structured data if it exists
+    ...(seo.structuredData && { 
+      other: {
+        'script:ld+json': JSON.stringify(seo.structuredData),
+      },
+    }),
+  };
+}
+
 
 // revalidatethe page every 600 secondes ( 10 min), ISR
 // TODO ; Use a webhook instead
@@ -72,7 +120,8 @@ const page = async ({ params }: { params: { slug: string } }) => {
         <article
           dangerouslySetInnerHTML={{ __html: parsedMarkdown }}
           className="prose prose-slate dark:prose-invert lg:prose-xl prose-img:rounded-xl"
-        ></article>
+        >
+        </article>
       </div>
     </main>
   );

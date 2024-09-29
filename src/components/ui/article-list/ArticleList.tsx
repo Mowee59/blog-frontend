@@ -4,7 +4,9 @@ import React, { useEffect } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchArticles } from "@/libs/axiosClient";
 import ArticleCard from "../article-card/ArticleCard";
+import ArticleCardFallback from "../article-card/ArticleCardFallback";
 import { useInView } from "react-intersection-observer";
+import { ErrorBoundary } from "react-error-boundary";
 
 // Type definition of the props
 type ArticleListProps = {
@@ -68,9 +70,14 @@ const ArticleList = ({ queryParams = "" }: ArticleListProps) => {
               <div key={key} className="flex flex-col gap-8 md:gap-12 ">
                 {
                   // Iterating through articles of the current page and displaying them
-                  articles.map((article) => {
-                    return <ArticleCard key={article.id} article={article} />;
-                  })
+                  articles.map((article) => (
+                    <ErrorBoundary
+                      key={article.id}
+                      FallbackComponent={ArticleCardFallback}
+                    >
+                      <ArticleCard article={article} />
+                    </ErrorBoundary>
+                  ))
                 }
               </div>
             );

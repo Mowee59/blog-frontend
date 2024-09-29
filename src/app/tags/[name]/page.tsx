@@ -3,6 +3,7 @@ import React from "react";
 import Tags from "../page";
 import Image from "next/image";
 import ArticleList from "@/components/ui/article-list/ArticleList";
+import { Metadata } from "next/types";
 
 /**
  * This builtin in next js function allows to generate params so we can render pages on the server at build time and cache them this will improve performances and seo
@@ -16,6 +17,52 @@ export async function generateStaticParams() {
     name: tag.attributes.name,
   }));
 }
+
+// This function generates metadata for the tag page
+export async function generateMetadata({ params }: { params: { name: string } }): Promise<Metadata> {
+  // Fetch the tag data using the name from the URL parameters
+  const tagPayload = await fetchTagByName(params.name);
+  const tag = tagPayload.data[0];
+  const seo = tag.attributes.seo;
+
+  // If there's no SEO data, return basic metadata
+  if (!seo) {
+    return {
+      title: `#${tag.attributes.name}`,
+      description: tag.attributes.description,
+    };
+  }
+
+  // If SEO data exists, return a more comprehensive metadata object
+  return {
+    // Basic metadata
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+    keywords: seo.keywords,
+    robots: seo.metaRobots,
+    viewport: seo.metaViewport,
+    canonical: seo.canonicalURL,
+
+    // Open Graph metadata for social media sharing
+    openGraph: {
+      images: seo.metaImage ? [seo.metaImage.data.attributes.url] : [],
+    },
+
+    // Twitter-specific metadata
+    twitter: {
+      card: 'summary_large_image',
+      images: seo.metaTwitterImage ? [seo.metaTwitterImage.data.attributes.url] : [],
+    },
+
+    // Include structured data if it exists
+    ...(seo.structuredData && { 
+      other: {
+        'script:ld+json': JSON.stringify(seo.structuredData),
+      },
+    }),
+  };
+}
+
 
 // revalidatethe page every 600 secondes ( 10 min), ISR
 // TODO ; Use a webhook instead
