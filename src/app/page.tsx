@@ -24,7 +24,6 @@ const Home = async () => {
           {featuredArticle?.attributes.description}
         </p>
       </div>
-      {/* #TODO Handle image sizing */}
       <div>
         <div className="relative mx-auto  mb-4 h-[340px] w-full lg:h-[500px] ">
           <Image

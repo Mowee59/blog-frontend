@@ -57,7 +57,7 @@ export interface Article_NoRelations {
 export interface Article_Preview {
   id: number;
   attributes: {
-    publishedAt: Date;
+    publishedAt: string;
     title: string;
     coverImage: { data: Media };
     slug: string;

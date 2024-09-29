@@ -34,7 +34,7 @@ const ArticleCard = (props: ArticleCardProps) => {
               <div className="inline-block ">
                 {tags.map((tag) => (
                   <span key={tag.id} className="mr-1 hover:underline">
-                    {"#" + tag.attributes.name + " "}
+                    {"#" + tag.attributes?.name + " "}
                   </span>
                 ))}
               </div>
@@ -53,7 +53,7 @@ const ArticleCard = (props: ArticleCardProps) => {
                 props.article.attributes.coverImage.data.attributes
                   .alternativeText
               }
-              fill
+              fill={true}
               className=" rounded "
             />
           </div>

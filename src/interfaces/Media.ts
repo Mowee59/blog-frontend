@@ -17,8 +17,8 @@ import { MediaFormat } from './MediaFormat';
         url: string;
         previewUrl: string;
         provider: string;
-        createdAt: Date;
-        updatedAt: Date;
+        createdAt: Date | string;
+        updatedAt: Date | string;
       }
     }
     export interface Media_Plain {
@@ -36,8 +36,8 @@ import { MediaFormat } from './MediaFormat';
       url: string;
       previewUrl: string;
       provider: string;
-      createdAt: Date;
-      updatedAt: Date;
+      createdAt: Date | string;
+      updatedAt: Date | string;
     }
     
 
