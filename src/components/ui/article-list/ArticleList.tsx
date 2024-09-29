@@ -56,7 +56,14 @@ const ArticleList = ({ queryParams = "" }: ArticleListProps) => {
     <div className="mx-auto h-20 w-20 animate-spin rounded-full border-8 border-gray-300 border-t-blue-600" />
   ) : status === "error" ? (
     //If status is error, we display the error message
-    <div>{error.message}</div>
+    <div className="w-full p-4 bg-red-50 border border-red-300 rounded-md shadow-sm">
+      <h2 className="text-lg font-semibold text-red-800 mb-2">Une erreur s'est produite</h2>
+      <p className="text-red-600 mb-4">Nous n'avons pas pu charger les articles. Veuillez réessayer plus tard.</p>
+      <details className="text-sm text-red-700">
+        <summary className="cursor-pointer hover:underline">Détails techniques</summary>
+        <p className="mt-2 p-2 bg-red-100 rounded">{error.message}</p>
+      </details>
+    </div>
   ) : (
     // If status is neither pending nor error, we can assule it's "success"
     <>

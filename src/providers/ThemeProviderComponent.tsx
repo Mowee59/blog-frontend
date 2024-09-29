@@ -14,7 +14,7 @@ export function ThemeProviderComponent({
       defaultTheme="system" // Set the default theme to follow the system preference
       enableSystem // Enable system theme detection
     >
-      {children} // Render the child components wrapped by the ThemeProvider
+      {children} 
     </ThemeProvider>
   );
 }

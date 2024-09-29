@@ -3,6 +3,7 @@ import { fetchArticleBySlug, fetchArticles } from "@/libs/axiosServer";
 import markdownToHtml from "@/libs/markdownToHtml";
 import React from "react";
 import '@/../public/css/prism.css';
+import { notFound } from 'next/navigation';
 /**
  * This builtin in next js function allows to generate params so we can render pages on the server at build time and cache them this will improve performances and seo
  *
@@ -21,6 +22,16 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   // Fetch the article data using the slug from the URL parameters
   const articlePayload = await fetchArticleBySlug(params.slug);
+
+  // Check if the article exists
+  if (!articlePayload.data || articlePayload.data.length === 0) {
+    // If no article is found, return a default metadata object
+    return {
+      title: 'Article Not Found',
+      description: 'The requested article could not be found.',
+    };
+  }
+
   const article = articlePayload.data[0];
   const seo = article.attributes.seo;
 
@@ -72,59 +83,70 @@ export const revalidate = 600;
 export const dynamicParams = true;
 
 const page = async ({ params }: { params: { slug: string } }) => {
-  // Retrieving the article as a strapi payload
-  const articlePayload = await fetchArticleBySlug(params.slug);
+  try {
+    // Retrieving the article as a strapi payload
+    const articlePayload = await fetchArticleBySlug(params.slug);
 
-  // Assigning the article data itself to a variable
-  const article = articlePayload.data[0];
-  // Creating a new Date object from the publishedAt attribute
-  const publicationDate = new Date(article.attributes.publishedAt as string);
+    // Check if the article exists
+    if (!articlePayload.data || articlePayload.data.length === 0) {
+      // If no article is found, redirect to the 404 page
+      notFound();
+    }
 
-  // The array of tags the article is related with
-  const tags = article.attributes.tags?.data ?? [];
+    // Assigning the article data itself to a variable
+    const article = articlePayload.data[0];
+    // Creating a new Date object from the publishedAt attribute
+    const publicationDate = new Date(article.attributes.publishedAt as string);
 
-  // We parse the markdown to get HTML content
-  const parsedMarkdown = await markdownToHtml(article.attributes.content);
+    // The array of tags the article is related with
+    const tags = article.attributes.tags?.data ?? [];
 
-  return (
-    <main className="container flex flex-col lg:max-w-screen-lg ">
-      <div className=" lg:px-10 xl:px-20">
-        <div className="flex flex-col">
-          <div className="flex flex-col gap-6">
-            <div className="flex justify-between">
-              <h6 className="text-xs font-medium leading-3 text-neutral-600 dark:text-neutral-400">
-                {`${publicationDate.toLocaleDateString("Fr-fr", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}`}
-                <br />
-                {tags.map((tag) => (
-                  <span key={tag.id} className="mr-1 hover:underline ">
-                    {"#" + tag.attributes.name + " "}
-                  </span>
-                ))}
-              </h6>
-              <h6 className="text-xs font-medium leading-3 text-neutral-600 dark:text-neutral-400">
-                {article.attributes.readingTime.slice(0, -5)}
-              </h6>
+    // We parse the markdown to get HTML content
+    const parsedMarkdown = await markdownToHtml(article.attributes.content);
+
+    return (
+      <main className="container flex flex-col lg:max-w-screen-lg ">
+        <div className=" lg:px-10 xl:px-20">
+          <div className="flex flex-col">
+            <div className="flex flex-col gap-6">
+              <div className="flex justify-between">
+                <h6 className="text-xs font-medium leading-3 text-neutral-600 dark:text-neutral-400">
+                  {`${publicationDate.toLocaleDateString("Fr-fr", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}`}
+                  <br />
+                  {tags.map((tag) => (
+                    <span key={tag.id} className="mr-1 hover:underline ">
+                      {"#" + tag.attributes.name + " "}
+                    </span>
+                  ))}
+                </h6>
+                <h6 className="text-xs font-medium leading-3 text-neutral-600 dark:text-neutral-400">
+                  {article.attributes.readingTime.slice(0, -5)}
+                </h6>
+              </div>
+              <h1 className="mb-6 text-2xl font-medium leading-normal text-neutral-900 dark:text-neutral-300 sm:text-4xl sm:leading-10 lg:mb-8 lg:text-5xl xl:text-6xl">
+                {article.attributes.title}
+              </h1>
+              {/* <p className="text-base leading-relaxed text-neutral-700 dark:text-neutral-400">
+                {article.attributes.description}
+              </p> */}
             </div>
-            <h1 className="mb-6 text-2xl font-medium leading-normal text-neutral-900 dark:text-neutral-300 sm:text-4xl sm:leading-10 lg:mb-8 lg:text-5xl xl:text-6xl">
-              {article.attributes.title}
-            </h1>
-            {/* <p className="text-base leading-relaxed text-neutral-700 dark:text-neutral-400">
-              {article.attributes.description}
-            </p> */}
           </div>
+          <article
+            dangerouslySetInnerHTML={{ __html: parsedMarkdown }}
+            className="prose prose-slate dark:prose-invert lg:prose-xl prose-img:rounded-xl"
+          >
+          </article>
         </div>
-        <article
-          dangerouslySetInnerHTML={{ __html: parsedMarkdown }}
-          className="prose prose-slate dark:prose-invert lg:prose-xl prose-img:rounded-xl"
-        >
-        </article>
-      </div>
-    </main>
-  );
+      </main>
+    );
+  } catch (error) {
+    console.error("Error fetching article:", error);
+    notFound();
+  }
 };
 
 export default page;
