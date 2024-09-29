@@ -9,23 +9,19 @@ type TagCardProps = {
   tag: Tag;
 };
 
-const TagCard = async (props: TagCardProps) => {
+const TagCard =  (props: TagCardProps) => {
   // Assigning the cover image attributes to a variable
   const coverImageAttributes = props.tag.attributes.cover.data.attributes;
 
   // Asssigning the thumbnail to a varialbe
   const coverImageThumbnail = coverImageAttributes.formats.thumbnail;
 
-  // Fetching the articles related to the tag
-  // We are adding  the 'fields[0]' query parameter to filter all list car we are only interested in metadata ( to get the number of articles related to the tag)
-  const articles = await fetchArticlesByTagName(
-    props.tag.attributes.name,
-    "fields[0]=title",
-  );
+  // Getting the number of articles related to the tag
+  const articlesCount = props.tag.attributes.articles?.data.length;
 
   return (
     <article className="flex h-[225px] w-full flex-col gap-5">
-      <Link href={`/tags/${props.tag.attributes.name}`}>
+      <Link href={`/tags/${props.tag.attributes.name.toLocaleLowerCase()}`}>
         <div>
           <div className="relative h-[150px]">
             <Image
@@ -40,7 +36,7 @@ const TagCard = async (props: TagCardProps) => {
 
           <div className="flex flex-col gap-1">
             <h3 className="text-xl font-medium leading-snug text-neutral-900 dark:text-neutral-300">{`#${props.tag.attributes.name}`}</h3>
-            <h4 className="text-sm font-medium leading-4 text-[#3d3d3d] dark:text-neutral-400">{`${articles.meta.pagination?.total} posts`}</h4>
+            <h4 className="text-sm font-medium leading-4 text-[#3d3d3d] dark:text-neutral-400">{`${articlesCount} Articles`}</h4>
           </div>
         </div>
       </Link>

@@ -8,9 +8,9 @@ import { Tag_Plain } from "./tag";
 export interface Article {
   id: number;
   attributes: {
-    createdAt: Date;
-    updatedAt: Date;
-    publishedAt?: Date;
+    createdAt: Date | String;
+    updatedAt: Date | String;
+    publishedAt?: Date | String;
     title: string;
     coverImage: { data: Media };
     readingTime: string;
@@ -24,9 +24,9 @@ export interface Article {
 }
 export interface Article_Plain {
   id: number;
-  createdAt: Date;
-  updatedAt: Date;
-  publishedAt?: Date;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+  publishedAt?: Date | string;
   title: string;
   coverImage: Media_Plain;
   readingTime: string;
@@ -40,9 +40,9 @@ export interface Article_Plain {
 
 export interface Article_NoRelations {
   id: number;
-  createdAt: Date;
-  updatedAt: Date;
-  publishedAt?: Date;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+  publishedAt?: Date | String;
   title: string;
   coverImage: number;
   readingTime: string;

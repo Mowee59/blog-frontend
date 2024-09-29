@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TagCard matches snapshot 1`] = `
+<DocumentFragment>
+  <article
+    class="flex h-[225px] w-full flex-col gap-5"
+  >
+    <a
+      href="/tags/react"
+    >
+      <div>
+        <div
+          class="relative h-[150px]"
+        >
+          <img
+            alt="Image de couverture catégorie Algorithmie"
+            blurdataurl=""
+            class=" rounded-xl object-cover"
+            placeholder="blur"
+            src="/uploads/thumbnail_algo_8111d1aa1b.webp"
+          />
+        </div>
+        <div
+          class="flex flex-col gap-1"
+        >
+          <h3
+            class="text-xl font-medium leading-snug text-neutral-900 dark:text-neutral-300"
+          >
+            #React
+          </h3>
+          <h4
+            class="text-sm font-medium leading-4 text-[#3d3d3d] dark:text-neutral-400"
+          >
+            3 Articles
+          </h4>
+        </div>
+      </div>
+    </a>
+  </article>
+</DocumentFragment>
+`;
