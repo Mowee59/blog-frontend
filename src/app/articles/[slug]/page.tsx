@@ -76,7 +76,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 // revalidatethe page every 600 secondes ( 10 min), ISR
 // TODO ; Use a webhook instead
-export const revalidate = 600;
+// export const revalidate = 600;
 
 // TODO Handle 404
 // Generate page on demand if path hasn't been regenerated yet
