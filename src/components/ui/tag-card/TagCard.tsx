@@ -29,7 +29,6 @@ const TagCard =  (props: TagCardProps) => {
               alt={coverImageAttributes.alternativeText}
               fill
               placeholder="blur"
-              blurDataURL={`${coverImageAttributes.previewUrl}`}
               className=" rounded-xl object-cover"
             ></Image>
           </div>

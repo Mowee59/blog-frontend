@@ -14,7 +14,6 @@ exports[`TagCard matches snapshot 1`] = `
         >
           <img
             alt="Image de couverture catégorie Algorithmie"
-            blurdataurl=""
             class=" rounded-xl object-cover"
             placeholder="blur"
             src="/uploads/thumbnail_algo_8111d1aa1b.webp"
