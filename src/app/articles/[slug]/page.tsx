@@ -2,7 +2,7 @@ import { fetchArticleBySlug, fetchArticles } from "@/libs/axiosServer";
 import markdownToHtml from "@/libs/markdownToHtml";
 import { parse } from "path";
 import React from "react";
-
+import '@/../public/css/prism.css';
 /**
  * This builtin in next js function allows to generate params so we can render pages on the server at build time and cache them this will improve performances and seo
  *
@@ -72,7 +72,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
         </div>
         <article
           dangerouslySetInnerHTML={{ __html: parsedMarkdown }}
-          className="prose prose-slate dark:prose-invert lg:prose-xl prose-img:rounded-xl"
+          className="prose prose-slate dark:prose-invert lg:prose-xl prose-img:rounded-xl line-numbers"
         ></article>
       </div>
     </main>
