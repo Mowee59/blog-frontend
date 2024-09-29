@@ -8,6 +8,9 @@ import rehypeStringify from 'rehype-stringify';
 import rehypePrism from 'rehype-prism-plus';
 import remarkGfm from 'remark-gfm';
 
+
+// TODO: Move this file out of static assets
+
 /**
  * A helper function that parses a markdown string into HTML
  *

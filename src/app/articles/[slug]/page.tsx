@@ -1,6 +1,5 @@
 import { fetchArticleBySlug, fetchArticles } from "@/libs/axiosServer";
 import markdownToHtml from "@/libs/markdownToHtml";
-import { parse } from "path";
 import React from "react";
 import '@/../public/css/prism.css';
 /**
@@ -40,7 +39,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
   const parsedMarkdown = await markdownToHtml(article.attributes.content);
 
   return (
-    <main className="container flex flex-col lg:max-w-screen-lg">
+    <main className="container flex flex-col lg:max-w-screen-lg ">
       <div className=" lg:px-10 xl:px-20">
         <div className="flex flex-col">
           <div className="flex flex-col gap-6">
@@ -72,7 +71,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
         </div>
         <article
           dangerouslySetInnerHTML={{ __html: parsedMarkdown }}
-          className="prose prose-slate dark:prose-invert lg:prose-xl prose-img:rounded-xl line-numbers"
+          className="prose prose-slate dark:prose-invert lg:prose-xl prose-img:rounded-xl"
         ></article>
       </div>
     </main>
