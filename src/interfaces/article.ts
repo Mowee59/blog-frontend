@@ -4,6 +4,7 @@ import { Media } from "./Media";
 import { Tag } from "./tag";
 import { Media_Plain } from "./Media";
 import { Tag_Plain } from "./tag";
+import { Seo, Seo_NoRelations, Seo_Plain } from "./seo";
 
 export interface Article {
   id: number;
@@ -18,6 +19,7 @@ export interface Article {
     slug: string;
     description: string;
     tags?: { data: Tag[] };
+    seo?: Seo;
     locale: string;
     localizations?: { data: Article[] };
   };
@@ -34,6 +36,7 @@ export interface Article_Plain {
   slug: string;
   description: string;
   tags?: Tag_Plain[];
+  seo?: Seo_Plain;
   locale: string;
   localizations?: Article_Plain[];
 }
@@ -50,6 +53,7 @@ export interface Article_NoRelations {
   slug: string;
   description: string;
   tags?: number[];
+  seo?: Seo_NoRelations;
   locale: string;
   localizations?: Article[];
 }
