@@ -4,6 +4,7 @@ import { Payload } from "@/interfaces/Payload";
 import { Tag } from "@/interfaces/tag";
 import axios, { AxiosResponse } from "axios";
 import { apiServer } from "./axiosConfig";
+import { About } from "@/interfaces/about";
 
 /**
  *
@@ -56,6 +57,19 @@ export const fetchHomePageData = async (): Promise<Payload<BlogHomePage>> => {
   );
   return response.data;
 };
+
+
+/**
+ * Fetch the about page data
+ *
+ * @returns A promise that resolves as a payload containing about page data
+ */
+export const fetchAboutPageData = async (): Promise<Payload<About>> => {
+  const response = await apiServer.get("/about?populate=*");
+  return response.data;
+};
+
+
 
 /**
  * Fetch all the tags

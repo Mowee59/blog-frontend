@@ -2,12 +2,14 @@
 
 import { Article } from "./article";
 import { Article_Plain } from "./article";
+import { Seo, Seo_NoRelations, Seo_Plain } from "./seo";
 export interface BlogHomePage {
   id: number;
   attributes: {
     createdAt: Date;
     updatedAt: Date;
     publishedAt?: Date;
+    seo?: Seo;
     featuredArticle?: { data: Article };
     locale: string;
     localizations?: { data: BlogHomePage[] };
@@ -18,6 +20,7 @@ export interface BlogHomePage_Plain {
   createdAt: Date;
   updatedAt: Date;
   publishedAt?: Date;
+  seo?: Seo_Plain
   featuredArticle?: Article_Plain;
   locale: string;
   localizations?: BlogHomePage_Plain[];
@@ -29,6 +32,7 @@ export interface BlogHomePage_NoRelations {
   updatedAt: Date;
   publishedAt?: Date;
   featuredArticle?: number;
+  seo?: Seo_NoRelations;
   locale: string;
   localizations?: BlogHomePage[];
 }
