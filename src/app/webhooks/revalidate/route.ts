@@ -11,9 +11,7 @@ export async function POST(request: NextRequest) {
   // Parse the request body to get the slug and model
   const body = await request.json();
   const authorization = request.headers.get('Authorization');
-
-  const { slug, model } = body;
-
+  const { model } = body;
   // TODO: Implement a more secure method to verify the secret
   // Check for secret to confirm this is a valid request
   if (authorization !== process.env.WEBHOOK_SECRET) {
@@ -22,12 +20,16 @@ export async function POST(request: NextRequest) {
 
   try {
     if (model === 'article') {
+      const slug = body.entry.slug;
+      
+
       // Revalidate the article page
       revalidatePath(`/articles/${slug}`);
       return NextResponse.json({ revalidated: true, now: Date.now() });
     } else if (model === 'tag') {
+      const name = body.entry.name;
       // Revalidate the tag page and the tags index page
-      revalidatePath(`/tags/${slug}`);
+      revalidatePath(`/tags/${name}`);
       revalidatePath('/tags');
       return NextResponse.json({ revalidated: true, now: Date.now() });
     } else {

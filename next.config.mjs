@@ -23,6 +23,19 @@ const nextConfig = {
       },
     ];
   },
+  // Allow CORS for the revalidate endpoint
+  // TODO: change that when deploying
+  async headers() {
+    return [
+      {
+        source: '/api/revalidate',
+        headers: [
+          { key: 'Access-Control-Allow-Origin', value: 'http://localhost:1337' },
+          { key: 'Access-Control-Allow-Methods', value: 'POST' },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
