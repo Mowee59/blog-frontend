@@ -3,16 +3,18 @@ import { revalidatePath } from 'next/cache';
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  console.log('body', body);
-  const { secret, slug, model } = body;
+  const authorization = request.headers.get('Authorization');
+
+  
+  const { slug, model } = body;
 
 
   
   //TODO: verify secret
   // Check for secret to confirm this is a valid request
-  // if (secret !== process.env.REVALIDATION_SECRET) {
-  //   return NextResponse.json({ message: 'Invalid token' }, { status: 401 });
-  // }
+  if (authorization !== process.env.WEBHOOK_SECRET) {
+    return NextResponse.json({ message: 'Invalid token' }, { status: 401 });
+  }
 
   if (model === 'article') {
     try {
