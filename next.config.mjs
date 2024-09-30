@@ -12,30 +12,14 @@ const nextConfig = {
 
   // Forward api requets
   async rewrites() {
-    if (process.env.NODE_ENV === 'production') {
-      return [
-        {
-          source: "/api/:path*",
-          destination: process.env.API_URL + "/:path*",
-        },
-        {
-          source: "/uploads/:path*",
-          destination: process.env.API_URL + "/uploads/:path*",
-        },
-      ];
-    }
-    return [];
-  },
-  // Allow CORS for the revalidate endpoint
-  // TODO: change that when deploying
-  async headers() {
     return [
       {
-        source: '/api/revalidate',
-        headers: [
-          { key: 'Access-Control-Allow-Origin', value: 'http://localhost:1337' },
-          { key: 'Access-Control-Allow-Methods', value: 'POST' },
-        ],
+        source: "/api/:path*", // The path pattern to match in your Next.js app
+        destination: "http://localhost:1337/api/:path*", // The URL where you want to forward the request
+      },
+      {
+        source: "/uploads/:path*", // The path pattern to match in your Next.js app
+        destination: "http://localhost:1337/uploads/:path*", // The URL where you want to forward the request
       },
     ];
   },
