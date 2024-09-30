@@ -1,32 +1,42 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 
+/**
+ * Handles POST requests for revalidating pages.
+ * This function is triggered by a webhook to update cached pages when content changes.
+ * @param {NextRequest} request - The incoming request object
+ * @returns {Promise<NextResponse>} A JSON response indicating the result of the revalidation
+ */
 export async function POST(request: NextRequest) {
+  // Parse the request body to get the slug and model
   const body = await request.json();
   const authorization = request.headers.get('Authorization');
 
-  
   const { slug, model } = body;
 
-
-  
-  //TODO: verify secret
+  // TODO: Implement a more secure method to verify the secret
   // Check for secret to confirm this is a valid request
   if (authorization !== process.env.WEBHOOK_SECRET) {
     return NextResponse.json({ message: 'Invalid token' }, { status: 401 });
   }
 
-  if (model === 'article') {
-    try {
+  try {
+    if (model === 'article') {
       // Revalidate the article page
       revalidatePath(`/articles/${slug}`);
       return NextResponse.json({ revalidated: true, now: Date.now() });
-    } catch (err) {
-      // If there was an error, Next.js will continue to show the last successfully generated page
-      return NextResponse.json({ revalidated: false }, { status: 500 });
+    } else if (model === 'tag') {
+      // Revalidate the tag page and the tags index page
+      revalidatePath(`/tags/${slug}`);
+      revalidatePath('/tags');
+      return NextResponse.json({ revalidated: true, now: Date.now() });
+    } else {
+      // Return an error for unsupported models
+      return NextResponse.json({ revalidated: false, message: 'Unsupported model' });
     }
-  } else {
-    return NextResponse.json({ revalidated: false, message: 'Not an article model' });
+  } catch (err) {
+    // If there was an error, Next.js will continue to show the last successfully generated page
+    // Return a 500 status code to indicate a server error
+    return NextResponse.json({ revalidated: false }, { status: 500 });
   }
-  
 }
