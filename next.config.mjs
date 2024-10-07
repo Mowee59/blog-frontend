@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
- 
+  
+  output: 'standalone',
 
   images: {
     // TODO change in prod

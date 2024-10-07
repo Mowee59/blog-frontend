@@ -1,0 +1,23 @@
+node_modules
+.git
+.next
+__mocks__
+__tests__
+
+# Ignore Dockerfile and docker-compose files
+Dockerfile
+
+# Ignore IDE specific files
+.vscode
+.idea
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore logs
+*.log
+
+# Ignore temporary files
+*.tmp
+*.swp

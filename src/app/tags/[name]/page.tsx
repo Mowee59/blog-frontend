@@ -10,14 +10,14 @@ import { notFound } from 'next/navigation';
  * This builtin in next js function allows to generate params so we can render pages on the server at build time and cache them this will improve performances and seo
  *
  */
-// export async function generateStaticParams() {
-//   const tagsPayload = await fetchTags();
-//   const tags = tagsPayload.data;
+export async function generateStaticParams() {
+  const tagsPayload = await fetchTags();
+  const tags = tagsPayload.data;
 
-//   return tags.map((tag) => ({
-//     name: tag.attributes.name,
-//   }));
-// }
+  return tags.map((tag) => ({
+    name: tag.attributes.name,
+  }));
+}
 
 
 
