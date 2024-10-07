@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: ${{ github.repository_owner }}/${{ github.event.repository.name }}
 
 jobs:
   build-and-push:
@@ -20,6 +20,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Lowercase the repo name
+        run: echo "REPO_LOWER=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+
       - name: Log in to the Container registry
         uses: docker/login-action@v2
         with:
@@ -31,7 +34,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.REPO_LOWER }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
@@ -39,6 +42,6 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ env.REPO_LOWER }}:latest
+            ${{ env.REGISTRY }}/${{ env.REPO_LOWER }}:${{ github.sha }}
           labels: ${{ steps.meta.outputs.labels }}
