@@ -39,7 +39,7 @@ const createApiClient = (baseURL: string): AxiosInstance => {
 };
 
 // Create server-side API client
-export const apiServer = createApiClient(process.env.API_URL || '');
+export const apiServer = createApiClient(`${process.env.STRAPI_URL}/api` || '');
 
 // Create client-side API client
 export const apiClient = createApiClient('/api');

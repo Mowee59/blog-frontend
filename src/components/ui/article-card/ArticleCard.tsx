@@ -48,7 +48,7 @@ const ArticleCard = (props: ArticleCardProps) => {
           </div>
           <div className="relative  hidden h-[120px] w-[160px] flex-shrink-0 @md:block">
             <Image
-              src={coverImageThumbnail.url}
+              src={`${coverImageThumbnail.url}`}
               alt={
                 props.article.attributes.coverImage.data.attributes
                   .alternativeText

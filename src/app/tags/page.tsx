@@ -1,7 +1,24 @@
 import React from "react";
-import { fetchArticles, fetchTags } from "@/libs/axiosServer";
+import {  fetchTags } from "@/libs/axiosServer";
 import TagCard from "@/components/ui/tag-card/TagCard";
-import ArticleList from "@/components/ui/article-list/ArticleList";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Aniss.dev | Les tags",
+  description: "Explorez ici les differenttes thématiques abordées sur le blog.",
+  openGraph: {
+    title: "TAniss.dev | Les tags",
+    description: "Explorez ici les differenttes thématiques abordées sur le blog.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aniss.dev | Les tags",
+    description: "Explorez ici les differenttes thématiques abordées sur le blog.",
+  },
+};
+
 
 const Tags: React.FC = async () => {
   // Fetching all the tags

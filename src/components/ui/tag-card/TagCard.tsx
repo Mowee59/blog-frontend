@@ -25,7 +25,7 @@ const TagCard =  (props: TagCardProps) => {
         <div>
           <div className="relative h-[150px]">
             <Image
-              src={`${coverImageThumbnail.url}`}
+              src={`${process.env.STRAPI_URL}${coverImageThumbnail.url}`}
               alt={coverImageAttributes.alternativeText}
               fill
               className=" rounded-xl object-cover"

@@ -127,7 +127,7 @@ const page = async ({ params }: { params: { name: string } }) => {
           <div className="relative mx-auto  mb-4 h-[340px] w-full lg:h-[500px] ">
             <Image
               // Image url structure is : strapiUrl/uplooads/image
-              src={`${coverImage.attributes.url}`}
+              src={`${process.env.STRAPI_URL}${coverImage.attributes.url}`}
               alt={`${coverImage.attributes.alternativeText}` || "cover image"}
               fill
               className=" rounded-xl object-cover"

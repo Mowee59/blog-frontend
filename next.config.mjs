@@ -9,6 +9,10 @@ const nextConfig = {
         protocol: "http",
         hostname: "localhost",
       },
+      {
+        protocol: "https",
+        hostname: "strapi.aniss.dev",
+      }
     ],
   },
 
@@ -17,11 +21,11 @@ const nextConfig = {
     return [
       {
         source: "/api/:path*", // The path pattern to match in your Next.js app
-        destination: "http://localhost:1337/api/:path*", // The URL where you want to forward the request
+        destination: `${process.env.STRAPI_URL}/api/:path*`, // The URL where you want to forward the request
       },
       {
         source: "/uploads/:path*", // The path pattern to match in your Next.js app
-        destination: "http://localhost:1337/uploads/:path*", // The URL where you want to forward the request
+        destination: `${process.env.STRAPI_URL}/uploads/:path*`, // The URL where you want to forward the request
       },
     ];
   },
@@ -32,7 +36,7 @@ const nextConfig = {
       {
         source: '/api/revalidate',
         headers: [
-          { key: 'Access-Control-Allow-Origin', value: 'http://localhost:1337' },
+          { key: 'Access-Control-Allow-Origin', value: `${process.env.STRAPI_URL}` },
           { key: 'Access-Control-Allow-Methods', value: 'POST' },
         ],
       },
