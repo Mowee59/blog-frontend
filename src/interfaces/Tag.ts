@@ -2,9 +2,9 @@
 
 import { Media } from "./Media";
 import { Media_Plain } from "./Media";
-import { Article } from "./article";
-import { Article_Plain } from "./article";
-import { Seo, Seo_NoRelations, Seo_Plain } from "./seo";
+import { Article } from "./Article";
+import { Article_Plain } from "./Article";
+import { Seo, Seo_NoRelations, Seo_Plain } from "./Seo";
 
 export interface Tag {
   id: number;

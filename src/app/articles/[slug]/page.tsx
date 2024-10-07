@@ -4,18 +4,20 @@ import markdownToHtml from "@/libs/markdownToHtml";
 import React from "react";
 import '@/../public/css/prism.css';
 import { notFound } from 'next/navigation';
+
+
 /**
  * This builtin in next js function allows to generate params so we can render pages on the server at build time and cache them this will improve performances and seo
  *
  */
-export async function generateStaticParams() {
-  const articlesPayload = await fetchArticles();
-  const articles = articlesPayload.data;
+// export async function generateStaticParams() {
+//   const articlesPayload = await fetchArticles();
+//   const articles = articlesPayload.data;
 
-  return articles.map((article) => ({
-    slug: article.attributes.slug,
-  }));
-}
+//   return articles.map((article) => ({
+//     slug: article.attributes.slug,
+//   }));
+// }
 
 
 // This function generates metadata for the article page

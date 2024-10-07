@@ -1,4 +1,4 @@
-import { Tag } from "@/interfaces/tag";
+import { Tag } from "@/interfaces/Tag";
 import React from "react";
 import Image from "next/image";
 import { fetchArticlesByTagName } from "@/libs/axiosServer";

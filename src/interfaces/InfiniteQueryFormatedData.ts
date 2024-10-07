@@ -6,7 +6,7 @@
  */
 
 import { Payload } from "./Payload";
-import { Article, Article_Preview } from "./article";
+import { Article, Article_Preview } from "./Article";
 
 export interface infiniteQueryFormatedData {
   data: Payload<Article_Preview[]>;

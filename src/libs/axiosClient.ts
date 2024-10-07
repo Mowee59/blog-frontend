@@ -5,12 +5,12 @@
  */
 
 import axios from "axios";
-import { Article } from "@/interfaces/article";
-import { BlogHomePage } from "@/interfaces/blog-home-page";
+import { Article } from "@/interfaces/Article";
+import { BlogHomePage } from "@/interfaces/Blog-home-page";
 import { Payload } from "@/interfaces/Payload";
-import { Tag } from "@/interfaces/tag";
+import { Tag } from "@/interfaces/Tag";
 import { QueryFunction, QueryFunctionContext } from "@tanstack/react-query";
-import { infiniteQueryFormatedData } from "@/interfaces/infiniteQueryFormatedData";
+import { infiniteQueryFormatedData } from "@/interfaces/InfiniteQueryFormatedData";
 import { apiClient } from './axiosConfig';
 
 //Number of article per page

@@ -1,4 +1,4 @@
-import { Seo, Seo_Plain, Seo_NoRelations } from "./seo";
+import { Seo, Seo_Plain, Seo_NoRelations } from "./Seo";
 
 export interface About {
   id: number;

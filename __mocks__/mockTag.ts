@@ -1,5 +1,5 @@
-import { Article, Article_NoRelations } from '@/interfaces/article';
-import { Tag } from '@/interfaces/tag';
+import { Article, Article_NoRelations } from '@/interfaces/Article';
+import { Tag } from '@/interfaces/Tag';
 
 export const mockTag: Tag = {
   id: 1,

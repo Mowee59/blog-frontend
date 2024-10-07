@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { Article, Article_Preview } from "@/interfaces/article";
+import { Article, Article_Preview } from "@/interfaces/Article";
 import Link from "next/link";
 
 type ArticleCardProps = {

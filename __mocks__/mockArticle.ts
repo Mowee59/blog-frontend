@@ -1,4 +1,4 @@
-import { Article_Preview } from "@/interfaces/article";
+import { Article_Preview } from "@/interfaces/Article";
 import { Media } from "@/interfaces/Media";
 
 export const mockArticle: Article_Preview = {

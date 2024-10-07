@@ -1,10 +1,10 @@
-import { Article } from "@/interfaces/article";
-import { BlogHomePage } from "@/interfaces/blog-home-page";
+import { Article } from "@/interfaces/Article";
+import { BlogHomePage } from "@/interfaces/Blog-home-page";
 import { Payload } from "@/interfaces/Payload";
-import { Tag } from "@/interfaces/tag";
+import { Tag } from "@/interfaces/Tag";
 import axios, { AxiosResponse } from "axios";
 import { apiServer } from "./axiosConfig";
-import { About } from "@/interfaces/about";
+import { About } from "@/interfaces/About";
 
 /**
  *

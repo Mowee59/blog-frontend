@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import ArticleCard from "../src/components/ui/article-card/ArticleCard";
-import { Article_Preview } from '@/interfaces/article';
+import { Article_Preview } from '@/interfaces/Article';
 import { Media } from '@/interfaces/Media';
 import { mockArticle } from '../__mocks__/mockArticle';
 

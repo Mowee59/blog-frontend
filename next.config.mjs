@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Help creating a light docker image
-  output: 'standalone',
+ 
 
   images: {
     // TODO change in prod
