@@ -1,6 +1,5 @@
 import { fetchTagByName, fetchTags } from "@/libs/axiosServer";
 import React from "react";
-import Tags from "../page";
 import Image from "next/image";
 import ArticleList from "@/components/ui/article-list/ArticleList";
 import { Metadata } from "next/types";
@@ -18,9 +17,6 @@ export async function generateStaticParams() {
     name: tag.attributes.name,
   }));
 }
-
-
-
 
 
 // This function generates metadata for the tag page
@@ -88,15 +84,11 @@ export async function generateMetadata({ params }: { params: { name: string } })
 }
 
 
-// revalidatethe page every 600 secondes ( 10 min), ISR
-// TODO ; Use a webhook instead
-export const revalidate = 600;
-
 // TODO Handle 404
 // Generate page on demand if path hasn't been regenerated yet
 export const dynamicParams = true;
 
-const page = async ({ params }: { params: { name: string } }) => {
+const TagPage = async ({ params }: { params: { name: string } }) => {
   try {
     // Retrieving the tag as a strapi payload
     const tagPayload = await fetchTagByName(params.name);
@@ -150,4 +142,4 @@ const page = async ({ params }: { params: { name: string } }) => {
   }
 };
 
-export default page;
+export default TagPage;

@@ -21,8 +21,6 @@ export async function POST(request: NextRequest) {
   try {
     if (model === 'article') {
       const slug = body.entry.slug;
-      
-
       // Revalidate the article page
       revalidatePath(`/articles/${slug}`);
       return NextResponse.json({ revalidated: true, now: Date.now() });

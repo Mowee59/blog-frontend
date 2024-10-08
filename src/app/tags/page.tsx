@@ -40,5 +40,3 @@ const Tags: React.FC = async () => {
 
 export default Tags;
 
-//Invalidate the cache  every 600 secondes (10min)
-export const revalidate = 600;
