@@ -26,6 +26,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   // Fetch the article data using the slug from the URL parameters
   const articlePayload = await fetchArticleBySlug(params.slug);
+ 
+  
 
   // Check if the article exists
   if (!articlePayload.data || articlePayload.data.length === 0) {

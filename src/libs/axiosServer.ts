@@ -107,7 +107,7 @@ export const fetchArticlesByTagName = async (
 };
 
 /**
- * Fetch an article by slug
+ * Fetch an article by slug with its Seo data
  *
  * @param slug the slug of the article to retrieve
  * @returns A promise that resolves as a Payload containing a unique article
@@ -116,7 +116,7 @@ export const fetchArticleBySlug = async (
   slug: string,
 ): Promise<Payload<Article[]>> => {
   const response = await apiServer.get(
-    `/articles?filters[slug][$eqi]=${slug}&populate[0}=*&populate[seo][populate][1]=metaImage*`,
+    `/articles?filters[slug][$eqi]=${slug}&populate[seo][populate][1]=metaImage&populate[seo][populate][2]=metaTwitterImage&populate=tags`,
   );
   return response.data;
 };
