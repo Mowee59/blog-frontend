@@ -1,10 +1,9 @@
-import { Metadata } from 'next';
+import { Metadata } from "next";
 import { fetchArticleBySlug, fetchArticles } from "@/libs/axiosServer";
 import markdownToHtml from "@/libs/markdownToHtml";
 import React from "react";
-import '@/../public/css/prism.css';
-import { notFound } from 'next/navigation';
-
+import "@/../public/css/prism.css";
+import { notFound } from "next/navigation";
 
 /**
  * This builtin in next js function allows to generate params so we can render pages on the server at build time and cache them this will improve performances and seo
@@ -19,9 +18,12 @@ export async function generateStaticParams() {
   }));
 }
 
-
 // This function generates metadata for the article page
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
   // Fetch the article data using the slug from the URL parameters
   const articlePayload = await fetchArticleBySlug(params.slug);
 
@@ -29,8 +31,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   if (!articlePayload.data || articlePayload.data.length === 0) {
     // If no article is found, return a default metadata object
     return {
-      title: 'Article Not Found',
-      description: 'The requested article could not be found.',
+      title: "Article Not Found",
+      description: "The requested article could not be found.",
     };
   }
 
@@ -57,24 +59,55 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
     // Open Graph metadata for social media sharing
     openGraph: {
-      images: seo.metaImage ? [seo.metaImage.data.attributes.url] : [],
+      title: seo.metaTitle || article.attributes.title,
+      description: seo.metaDescription || article.attributes.description,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/articles/${article.attributes.slug}`,
+      siteName: "Aniss.dev",
+      images: seo.metaImage
+        ? [
+            {
+              url: seo.metaImage.data.attributes.url,
+              width: seo.metaImage.data.attributes.width,
+              height: seo.metaImage.data.attributes.height,
+              alt:
+                seo.metaImage.data.attributes.alternativeText ||
+                article.attributes.title,
+            },
+          ]
+        : [],
+      locale: "fr_FR",
+      type: "article",
+      publishedTime: article.attributes.publishedAt,
+      authors: "Aniss",
     },
 
     // Twitter-specific metadata
     twitter: {
-      card: 'summary_large_image',
-      images: seo.metaTwitterImage ? [seo.metaTwitterImage.data.attributes.url] : [],
+      card: "summary_large_image",
+      title: seo.metaTitle || article.attributes.title,
+      description: seo.metaDescription || article.attributes.description,
+      images: seo.metaTwitterImage
+        ? [
+            {
+              url: `${process.env.STRAPI_URL}${seo.metaTwitterImage.data.attributes.url}`,
+              alt:
+                seo.metaTwitterImage.data.attributes.alternativeText ||
+                article.attributes.title,
+              width: seo.metaTwitterImage.data.attributes.width,
+              height: seo.metaTwitterImage.data.attributes.height,
+            },
+          ]
+        : [],
     },
 
     // Include structured data if it exists
-    ...(seo.structuredData && { 
+    ...(seo.structuredData && {
       other: {
-        'script:ld+json': JSON.stringify(seo.structuredData),
+        "script:ld+json": JSON.stringify(seo.structuredData),
       },
     }),
   };
 }
-
 
 // revalidatethe page every 600 secondes ( 10 min), ISR
 // TODO ; Use a webhook instead
@@ -140,8 +173,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
           <article
             dangerouslySetInnerHTML={{ __html: parsedMarkdown }}
             className="prose prose-slate dark:prose-invert lg:prose-xl prose-img:rounded-xl"
-          >
-          </article>
+          ></article>
         </div>
       </main>
     );
