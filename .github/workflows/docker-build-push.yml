@@ -25,9 +25,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Convert the repository name to lowercase (GitHub package names must be lowercase)
-      - name: Lowercase the repo name
-        run: echo "REPO_LOWER=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+      # Step 2: Convert the repository name and owner to lowercase
+      - name: Lowercase the repo name and owner
+        run: |
+          echo "REPO_LOWER=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+          echo "OWNER_LOWER=${GITHUB_REPOSITORY_OWNER,,}" >>${GITHUB_ENV}
 
       # Step 3: Log in to the GitHub Container Registry
       - name: Log in to the Container registry
@@ -42,7 +44,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}
 
       # Step 5: Build and push the Docker image
       - name: Build and push Docker image
@@ -51,6 +53,6 @@ jobs:
           context: .  # Build context is the root of the repository
           push: true  # Push the image to the registry
           tags: |  # Tags for the Docker image
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:latest
+            ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:${{ github.sha }}
           labels: ${{ steps.meta.outputs.labels }}  # Labels extracted in the previous step
