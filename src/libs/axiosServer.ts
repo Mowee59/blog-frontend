@@ -12,8 +12,6 @@ import { About } from "@/interfaces/About";
  *
  */
 
-
-
 // // Add Axios interceptor for adding the authorization token
 // apiClient.interceptors.request.use(
 //   (config) => {
@@ -58,7 +56,6 @@ export const fetchHomePageData = async (): Promise<Payload<BlogHomePage>> => {
   return response.data;
 };
 
-
 /**
  * Fetch the about page data
  *
@@ -68,8 +65,6 @@ export const fetchAboutPageData = async (): Promise<Payload<About>> => {
   const response = await apiServer.get("/about?populate=*");
   return response.data;
 };
-
-
 
 /**
  * Fetch all the tags
@@ -121,7 +116,7 @@ export const fetchArticleBySlug = async (
   slug: string,
 ): Promise<Payload<Article[]>> => {
   const response = await apiServer.get(
-    `/articles?filters[slug][$eqi]=${slug}&populate=*`,
+    `/articles?filters[slug][$eqi]=${slug}&populate[0}=*&populate[seo][populate][1]=metaImage*`,
   );
   return response.data;
 };

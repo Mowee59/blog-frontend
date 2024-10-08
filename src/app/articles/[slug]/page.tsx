@@ -38,6 +38,7 @@ export async function generateMetadata({
 
   const article = articlePayload.data[0];
   const seo = article.attributes.seo;
+  
 
   // If there's no SEO data, return basic metadata
   if (!seo) {
