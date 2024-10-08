@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchArticles } from "@/libs/axiosClient";
 import ArticleCard from "../article-card/ArticleCard";
@@ -21,6 +21,9 @@ type ArticleListProps = {
  * @returns
  */
 const ArticleList = ({ queryParams = "" }: ArticleListProps) => {
+  const [showIntersectionObserver, setShowIntersectionObserver] =
+    useState(false);
+
   // Infinite query hook from react-query library
   const {
     data,
@@ -45,29 +48,35 @@ const ArticleList = ({ queryParams = "" }: ArticleListProps) => {
 
   // We use an effect to fetch next page of articles when boolean inView is true
   useEffect(() => {
-    if (inView) {
+    if (inView && showIntersectionObserver) {
       // According to the doc
       !isFetching && fetchNextPage();
     }
-  }, [inView, fetchNextPage, isFetching]);
+  }, [inView, fetchNextPage, isFetching, showIntersectionObserver]);
 
   return status === "pending" ? (
     // IF status is "pending" (no data yet), we dispay the loading spinner
     <div className="mx-auto h-20 w-20 animate-spin rounded-full border-8 border-gray-300 border-t-blue-600" />
   ) : status === "error" ? (
     //If status is error, we display the error message
-    <div className="w-full p-4 bg-red-50 border border-red-300 rounded-md shadow-sm">
-      <h2 className="text-lg font-semibold text-red-800 mb-2">Une erreur s'est produite</h2>
-      <p className="text-red-600 mb-4">Nous n'avons pas pu charger les articles. Veuillez réessayer plus tard.</p>
+    <div className="w-full rounded-md border border-red-300 bg-red-50 p-4 shadow-sm">
+      <h2 className="mb-2 text-lg font-semibold text-red-800">
+        Une erreur s'est produite
+      </h2>
+      <p className="mb-4 text-red-600">
+        Nous n'avons pas pu charger les articles. Veuillez réessayer plus tard.
+      </p>
       <details className="text-sm text-red-700">
-        <summary className="cursor-pointer hover:underline">Détails techniques</summary>
-        <p className="mt-2 p-2 bg-red-100 rounded">{error.message}</p>
+        <summary className="cursor-pointer hover:underline">
+          Détails techniques
+        </summary>
+        <p className="mt-2 rounded bg-red-100 p-2">{error.message}</p>
       </details>
     </div>
   ) : (
     // If status is neither pending nor error, we can assule it's "success"
     <>
-      <div className="flex w-full flex-col md:gap-12 ">
+      <div className="item flex w-full flex-col md:gap-12 ">
         {
           // Iterating throug pages
           data.pages.map((page, key) => {
@@ -92,21 +101,36 @@ const ArticleList = ({ queryParams = "" }: ArticleListProps) => {
         }
       </div>
 
-      {/* Div used to trigger fetching of the next page using intersection observer*/}
-      <div ref={ref} className="">
-        {isFetchingNextPage && (
-          <div className="mx-auto h-20 w-20 animate-spin rounded-full border-8 border-gray-300 border-t-blue-600" />
-        )}
-      </div>
+      {!showIntersectionObserver && hasNextPage && (
+        <div className="flex justify-center">
+          <button
+            onClick={() => setShowIntersectionObserver(true)}
+            className="mt-8 w-full rounded-md border border-neutral-300 bg-neutral-200 py-3 text-xs font-medium leading-3 text-[#3d3d3d] dark:border-[#3d3d3d] dark:bg-neutral-800 dark:text-neutral-400 md:max-w-72"
+          >
+            Voir Plus
+          </button>
+        </div>
+      )}
 
-      {
-        // If there's not any page more to laod we display a message
-        !hasNextPage && (
-          <div className="text-center text-neutral-400">
-            Plus d&apos;articles a charger
+      {showIntersectionObserver && (
+        <>
+          {/* Div used to trigger fetching of the next page using the intersection observer*/}
+          <div ref={ref} className="">
+            {isFetchingNextPage && (
+              <div className="mx-auto h-20 w-20 animate-spin rounded-full border-8 border-gray-300 border-t-blue-600" />
+            )}
           </div>
-        )
-      }
+
+          {
+            // If there's not any page more to laod we display a message
+            !hasNextPage && (
+              <div className="mt-10 text-center text-neutral-400">
+                Plus aucun article à charger
+              </div>
+            )
+          }
+        </>
+      )}
     </>
   );
 };

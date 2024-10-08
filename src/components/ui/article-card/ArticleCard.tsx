@@ -19,7 +19,7 @@ const ArticleCard = (props: ArticleCardProps) => {
 
   // The array of tags the article is related with
   const tags = props.article.attributes.tags!.data;
-  
+
   return (
     <Link href={`/articles/${props.article.attributes.slug}`}>
       <article className=" cursor-pointer @container">
@@ -28,7 +28,7 @@ const ArticleCard = (props: ArticleCardProps) => {
             <h3 className=" mb-3 text-xs font-medium leading-3 text-neutral-600 @lg:mb-2 dark:text-neutral-400">
               {`${publicationDate?.getDate()} `}
               <span className="text-transform: capitalize">
-                {`${publicationDate?.toLocaleDateString("FR-fr", { month: "short" }).slice(0, -2)} `}
+                {`${publicationDate?.toLocaleDateString("FR-fr", { month: "short" }).slice(0, 3)} `}
                 &#8226;{" "}
               </span>
               <div className="inline-block ">

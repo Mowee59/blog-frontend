@@ -9,7 +9,7 @@ type TagCardProps = {
   tag: Tag;
 };
 
-const TagCard =  (props: TagCardProps) => {
+const TagCard = (props: TagCardProps) => {
   // Assigning the cover image attributes to a variable
   const coverImageAttributes = props.tag.attributes.cover.data.attributes;
 
@@ -22,7 +22,7 @@ const TagCard =  (props: TagCardProps) => {
   return (
     <article className="flex h-[225px] w-full flex-col gap-5">
       <Link href={`/tags/${props.tag.attributes.name.toLocaleLowerCase()}`}>
-        <div>
+        <div className="flex flex-col gap-5">
           <div className="relative h-[150px]">
             <Image
               src={`${process.env.STRAPI_URL}${coverImageThumbnail.url}`}
