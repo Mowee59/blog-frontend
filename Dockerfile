@@ -15,6 +15,10 @@ RUN yarn install --frozen-lockfile
 
 # Rebuild the source code only when needed
 FROM base AS builder
+
+ARG STRAPI_URL=https://strapi.aniss.dev
+ENV STRAPI_URL=${STRAPI_URL}
+
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
