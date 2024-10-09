@@ -8,7 +8,9 @@ exports[`TagCard matches snapshot 1`] = `
     <a
       href="/tags/react"
     >
-      <div>
+      <div
+        class="flex flex-col gap-5"
+      >
         <div
           class="relative h-[150px]"
         >
