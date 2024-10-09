@@ -1,5 +1,5 @@
 # Workflow name
-name: Test, Build and Push Docker Image
+name: Test, Build, Push, and Deploy Docker Image
 
 # Trigger the workflow on push to the main branch
 on:
@@ -12,7 +12,7 @@ env:
   REGISTRY: ghcr.io # GitHub Container Registry
   IMAGE_NAME: ${{ github.repository_owner }}/${{ github.event.repository.name }} # Format: owner/repo-name
 
-# Define the jobs to run tests, then build and push the Docker image
+# Define the jobs to run tests, then build and push the Docker image, and finally deploy
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -75,7 +75,11 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:${{ github.sha }}
           labels: ${{ steps.meta.outputs.labels }} # Labels extracted in the previous step
 
-      # Updated Step 6: Deploy to VPS with custom SSH port
+  deploy:
+    needs: build-and-push # This job will only run if the build-and-push job succeeds
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Deploy to VPS
         env:
           VPS_SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
