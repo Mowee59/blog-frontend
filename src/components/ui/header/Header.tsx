@@ -27,18 +27,18 @@ const Header = () => {
     text-neutral-700 shadow-md dark:bg-gray-800 dark:text-neutral-400 sm:relative sm:inset-auto sm:flex sm:flex-row sm:gap-6 sm:bg-transparent sm:p-0 sm:text-sm sm:shadow-none sm:dark:bg-transparent`}
             >
               <li className="cursor-pointer">
-                <Link href="/about" onClick={() => isMenuOpen ?? toggleMenu}>
+                <Link href="/about" onClick={() => isMenuOpen ?? toggleMenu()}>
                   A propos
                 </Link>
               </li>
               <li
                 className="cursor-pointer"
-                onClick={() => isMenuOpen ?? toggleMenu}
+                onClick={() => isMenuOpen ?? toggleMenu()}
               >
                 Blog
               </li>
               <li className="cursor-pointer">
-                <Link href={"/tags"} onClick={() => isMenuOpen ?? toggleMenu}>
+                <Link href={"/tags"} onClick={() => isMenuOpen ?? toggleMenu()}>
                   Tags
                 </Link>
               </li>
