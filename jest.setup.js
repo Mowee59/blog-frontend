@@ -17,7 +17,7 @@ jest.mock('next/image', () => ({
 const serverMock = new MockAdapter(apiServer);
 const clientMock = new MockAdapter(apiClient);
 
-// Make them available globally in your tests
+// Make them available globally in the tests
 global.serverMock = serverMock;
 global.clientMock = clientMock;
 
@@ -26,3 +26,24 @@ afterEach(() => {
   serverMock.reset();
   clientMock.reset();
 });
+
+/**
+ * Hide consle logs if tests are successfull
+ */
+
+ // Store the original console methods
+ const originalConsole = { ...console };
+
+ // Override console methods
+ beforeAll(() => {
+   console.log = jest.fn();
+   console.warn = jest.fn();
+   console.error = jest.fn();
+ });
+
+ // Restore the original console methods after all tests
+ afterAll(() => {
+   console.log = originalConsole.log;
+   console.warn = originalConsole.warn;
+   console.error = originalConsole.error;
+ });
