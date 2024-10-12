@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { revalidatePath } from 'next/cache';
+import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 
 /**
  * Handles POST requests for revalidating pages.
@@ -10,29 +10,33 @@ import { revalidatePath } from 'next/cache';
 export async function POST(request: NextRequest) {
   // Parse the request body to get the slug and model
   const body = await request.json();
-  const authorization = request.headers.get('Authorization');
+  const authorization = request.headers.get("Authorization");
   const { model } = body;
   // TODO: Implement a more secure method to verify the secret
   // Check for secret to confirm this is a valid request
   if (authorization !== process.env.WEBHOOK_SECRET) {
-    return NextResponse.json({ message: 'Invalid token' }, { status: 401 });
+    return NextResponse.json({ message: "Invalid token" }, { status: 401 });
   }
 
   try {
-    if (model === 'article') {
+    if (model === "article") {
       const slug = body.entry.slug;
       // Revalidate the article page
       revalidatePath(`/articles/${slug}`);
+      revalidatePath("/tags");
       return NextResponse.json({ revalidated: true, now: Date.now() });
-    } else if (model === 'tag') {
+    } else if (model === "tag") {
       const name = body.entry.name;
       // Revalidate the tag page and the tags index page
       revalidatePath(`/tags/${name}`);
-      revalidatePath('/tags');
+      revalidatePath("/tags");
       return NextResponse.json({ revalidated: true, now: Date.now() });
     } else {
       // Return an error for unsupported models
-      return NextResponse.json({ revalidated: false, message: 'Unsupported model' });
+      return NextResponse.json({
+        revalidated: false,
+        message: "Unsupported model",
+      });
     }
   } catch (err) {
     // If there was an error, Next.js will continue to show the last successfully generated page

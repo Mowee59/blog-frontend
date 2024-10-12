@@ -25,6 +25,7 @@ export default function RootLayout({
   // Create a Queryclient from react-query library
 
   return (
+    // Warning: Hydration failed because the initial UI does not match what was returned from the server, because of the theme handling
     <html lang="fr" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProviderComponent>

@@ -53,7 +53,7 @@ const About = async () => {
           <h1 className="mb-6 text-2xl font-medium leading-normal text-neutral-900 dark:text-neutral-300 sm:text-4xl sm:leading-10 lg:mb-8 lg:text-5xl xl:text-6xl">
             Error
           </h1>
-          <p>An error occurred while fetching the about page data. Please try again later.</p>
+          <p>Une erreur s'est produite lors de la récupération des données de la page À propos. Veuillez réessayer plus tard.</p>
         </div>
       </main>
     );
