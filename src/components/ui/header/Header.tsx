@@ -12,7 +12,6 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
- 
   return (
     <header className="mb-20 mt-5 sm:mt-10">
       <div className="container flex h-9 items-center justify-between lg:max-w-screen-lg">
@@ -23,19 +22,33 @@ const Header = () => {
         </Link>
         <div className="flex gap-5">
           <nav>
-            <ul className={`${isMenuOpen ? 'flex' : 'hidden'} sm:flex flex-col sm:flex-row fixed sm:relative inset-0 sm:inset-auto bg-white dark:bg-gray-800 sm:bg-transparent sm:dark:bg-transparent
-    p-8 sm:p-0 shadow-md sm:shadow-none gap-12 sm:gap-6 text-xl sm:text-sm font-medium text-neutral-700 dark:text-neutral-400 z-50 items-center justify-center`}>
+            <ul
+              className={`${isMenuOpen ? "flex" : "hidden"} fixed inset-0 z-50 flex-col items-center justify-center gap-12 bg-white p-8 text-xl font-medium
+    text-neutral-700 shadow-md dark:bg-gray-800 dark:text-neutral-400 sm:relative sm:inset-auto sm:flex sm:flex-row sm:gap-6 sm:bg-transparent sm:p-0 sm:text-sm sm:shadow-none sm:dark:bg-transparent`}
+            >
               <li className="cursor-pointer">
-                <Link href="/about" onClick={toggleMenu}>A propos</Link>
+                <Link href="/about" onClick={() => isMenuOpen ?? toggleMenu}>
+                  A propos
+                </Link>
               </li>
-              <li className="cursor-pointer" onClick={toggleMenu}>Blog</li>
+              <li
+                className="cursor-pointer"
+                onClick={() => isMenuOpen ?? toggleMenu}
+              >
+                Blog
+              </li>
               <li className="cursor-pointer">
-                <Link href={"/tags"} onClick={toggleMenu}>Tags</Link>
+                <Link href={"/tags"} onClick={() => isMenuOpen ?? toggleMenu}>
+                  Tags
+                </Link>
               </li>
               {isMenuOpen && (
-                <li className="cursor-pointer sm:hidden" onClick={toggleMenu}>
+                <li
+                  className="cursor-pointer text-neutral-700 sm:hidden "
+                  onClick={toggleMenu}
+                >
                   <Image
-                    src={"/svg/burgerIcon.svg"}
+                    src={"/svg/closeIcon.svg"}
                     alt="Close menu icon"
                     width={16}
                     height={16}

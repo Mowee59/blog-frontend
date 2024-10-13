@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
       const slug = body.entry.slug;
       // Revalidate the article page
       revalidatePath(`/articles/${slug}`);
-      revalidatePath("/tags");
+      revalidatePath("/tags"); // So we have the right articles counts on the tags
       return NextResponse.json({ revalidated: true, now: Date.now() });
     } else if (model === "tag") {
       const name = body.entry.name;
