@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tags Page and TagCard Integration Tests matches snapshot 1`] = `
+<DocumentFragment>
+  <main
+    class="container  lg:max-w-screen-lg"
+  >
+    <section
+      class="flex flex-col items-center gap-9 px-6 sm:grid sm:grid-cols-2 sm:gap-10 lg:grid-cols-3"
+    >
+      <article
+        class="flex h-[225px] w-full flex-col gap-5"
+      >
+        <a
+          href="/tags/react"
+        >
+          <div
+            class="flex flex-col gap-5"
+          >
+            <div
+              class="relative h-[150px]"
+            >
+              <img
+                alt="Image de couverture catégorie React"
+                class=" rounded-xl object-cover"
+                src="undefined/uploads/thumbnail_react_8111d1aa1b.webp"
+              />
+            </div>
+            <div
+              class="flex flex-col gap-1"
+            >
+              <h3
+                class="text-xl font-medium leading-snug text-neutral-900 dark:text-neutral-300"
+              >
+                #React
+              </h3>
+              <h4
+                class="text-sm font-medium leading-4 text-[#3d3d3d] dark:text-neutral-400"
+              >
+                3 Articles
+              </h4>
+            </div>
+          </div>
+        </a>
+      </article>
+      <article
+        class="flex h-[225px] w-full flex-col gap-5"
+      >
+        <a
+          href="/tags/typescript"
+        >
+          <div
+            class="flex flex-col gap-5"
+          >
+            <div
+              class="relative h-[150px]"
+            >
+              <img
+                alt="Image de couverture catégorie TypeScript"
+                class=" rounded-xl object-cover"
+                src="undefined/uploads/thumbnail_typescript_9222e2bb2c.webp"
+              />
+            </div>
+            <div
+              class="flex flex-col gap-1"
+            >
+              <h3
+                class="text-xl font-medium leading-snug text-neutral-900 dark:text-neutral-300"
+              >
+                #TypeScript
+              </h3>
+              <h4
+                class="text-sm font-medium leading-4 text-[#3d3d3d] dark:text-neutral-400"
+              >
+                2 Articles
+              </h4>
+            </div>
+          </div>
+        </a>
+      </article>
+      <article
+        class="flex h-[225px] w-full flex-col gap-5"
+      >
+        <a
+          href="/tags/next.js"
+        >
+          <div
+            class="flex flex-col gap-5"
+          >
+            <div
+              class="relative h-[150px]"
+            >
+              <img
+                alt="Image de couverture catégorie Next.js"
+                class=" rounded-xl object-cover"
+                src="undefined/uploads/thumbnail_nextjs_3333f3cc3d.webp"
+              />
+            </div>
+            <div
+              class="flex flex-col gap-1"
+            >
+              <h3
+                class="text-xl font-medium leading-snug text-neutral-900 dark:text-neutral-300"
+              >
+                #Next.js
+              </h3>
+              <h4
+                class="text-sm font-medium leading-4 text-[#3d3d3d] dark:text-neutral-400"
+              >
+                4 Articles
+              </h4>
+            </div>
+          </div>
+        </a>
+      </article>
+    </section>
+  </main>
+</DocumentFragment>
+`;
