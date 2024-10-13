@@ -3,6 +3,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { apiServer, apiClient } from '@/libs/axiosConfig';
 
+
 // Mock next/image
 jest.mock('next/image', () => ({
   __esModule: true,

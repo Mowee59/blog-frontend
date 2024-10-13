@@ -10,44 +10,50 @@ import TagCard from '@/components/ui/tag-card/TagCard';
 jest.mock('@/libs/axiosServer', () => ({
   fetchTags: jest.fn(),
 }));
+  
 
-// Mock the TagCard component for unit tests
-const MockTagCard = ({ tag }: { tag: Tag }) => (
-  <div data-testid={`tag-card-${tag.id}`}>{tag.attributes.name}</div>
-);
+  jest.mock('@/components/ui/tag-card/TagCard', () => ({
+    __esModule: true,
+    default: ({ tag }: { tag: Tag }) => (<div data-testid={`tag-card-${tag.id}`}>{tag.attributes.name}</div>),
+  }));
+
+
+// Mock the fetchTags function
+(fetchTags as jest.Mock).mockResolvedValue({ data: mockSeveralTags });
+
 
 /**
  * Test suite for the Tags Page component
  */
 describe('Tags Page', () => {
-  // Set up mock data before each test
-  beforeEach(() => {
-    (fetchTags as jest.Mock).mockResolvedValue({ data: mockSeveralTags });
-  });
+
+
+
+
 
   describe('Unit Tests', () => {
-    beforeEach(() => {
-      jest.mock('@/components/ui/tag-card/TagCard', () => MockTagCard);
-    });
+
+
 
     /**
-     * Test case: Verify that all tag cards are rendered correctly
+     * Test case: Verify that all MockTagCard components are rendered
      */
-    // it('renders all tag cards correctly', async () => {
-    //   // Arrange: Render the Tags component
-    //   const { findByTestId } = render(await Tags({}));
+    it('renders all MockTagCard components', async () => {
+      // Arrange: Render the Tags component
+      render(await Tags({}));
 
-    //   // Act: Find all rendered tag cards
-    //   const renderedTags = await Promise.all(
-    //     mockSeveralTags.map(tag => findByTestId(`tag-card-${tag.id}`))
-    //   );
+      // Act: Find all rendered MockTagCard components
+      const renderedMockTagCards = screen.getAllByTestId(/^tag-card-/);
 
-    //   // Assert: Check if each tag card is in the document and has correct content
-    //   renderedTags.forEach((tagElement, index) => {
-    //     expect(tagElement).toBeInTheDocument();
-    //     expect(tagElement).toHaveTextContent(mockSeveralTags[index].attributes.name);
-    //   });
-    // });
+      // Assert: Check if the correct number of MockTagCard components are rendered
+      expect(renderedMockTagCards).toHaveLength(mockSeveralTags.length);
+
+      // Assert: Check if each MockTagCard has the correct content
+      mockSeveralTags.forEach((tag) => {
+        const mockTagCard = screen.getByTestId(`tag-card-${tag.id}`);
+        expect(mockTagCard).toHaveTextContent(tag.attributes.name);
+      });
+    });
 
     /**
      * Test case: Verify the layout and styling of the Tags page
@@ -67,51 +73,103 @@ describe('Tags Page', () => {
   });
 
   describe('Integration Tests', () => {
-    beforeEach(() => {
+
+    beforeAll(() => {
+      jest.resetModules();
       jest.unmock('@/components/ui/tag-card/TagCard');
+      
     });
 
     /**
-     * Test case: Verify that all real TagCard components are rendered correctly
+     * Test case: Verify that TagCard components are rendered with correct data
      */
-    it('renders all real TagCard components correctly', async () => {
-      // Arrange: Render the Tags component
-      const { container } = render(await Tags({}));
+    it('renders TagCard components with correct data', async () => {
+      // Arrange: Mock the API response
+      global.serverMock.onGet('/api/tags').reply(200, { data: mockSeveralTags });
 
-      // Act: Find all rendered TagCard components
-      const renderedTagCards = container.querySelectorAll('article');
+      // Act: Render the Tags component
+      render(await Tags({}));
 
-      // Assert: Check if the correct number of TagCard components are rendered
-      expect(renderedTagCards.length).toBe(mockSeveralTags.length);
-
-      // Assert: Check if each TagCard has the correct structure
-      renderedTagCards.forEach((tagCard, index) => {
-        expect(tagCard).toHaveClass('flex h-[225px] w-full flex-col gap-5');
-        expect(tagCard.querySelector('h3')).toHaveTextContent(`#${mockSeveralTags[index].attributes.name}`);
-        expect(tagCard.querySelector('h4')).toHaveTextContent(`${mockSeveralTags[index].attributes.articles?.data.length} Articles`);
+      // Assert: Check if each TagCard is rendered with correct data
+      mockSeveralTags.forEach((tag) => {
+        const tagCard = screen.getByTestId(`tag-card-${tag.id}`);
+        expect(tagCard).toBeInTheDocument();
+        expect(tagCard).toHaveTextContent(tag.attributes.name);
+        expect(tagCard).toHaveTextContent(`${tag.attributes.articles?.data.length} articles`);
       });
     });
+
+    /**
+     * Test case: Verify that TagCard components have correct links
+     */
+    it('renders TagCard components with correct links', async () => {
+      // Arrange: Mock the API response
+      global.serverMock.onGet('/api/tags').reply(200, { data: mockSeveralTags });
+
+      // Act: Render the Tags component
+      render(await Tags({}));
+
+      // Assert: Check if each TagCard has the correct link
+      mockSeveralTags.forEach((tag) => {
+        const tagLink = screen.getByRole('link', { name: tag.attributes.name });
+        expect(tagLink).toHaveAttribute('href', `/tags/${tag.attributes.name.toLowerCase()}`);
+      });
+    });
+
+    /**
+     * Test case: Verify that TagCard components display the correct number of articles
+     */
+    it('displays correct number of articles for each TagCard', async () => {
+      // Arrange: Mock the API response
+      global.serverMock.onGet('/api/tags').reply(200, { data: mockSeveralTags });
+
+      // Act: Render the Tags component
+      render(await Tags({}));
+
+      // Assert: Check if each TagCard displays the correct number of articles
+      mockSeveralTags.forEach((tag) => {
+        const tagCard = screen.getByTestId(`tag-card-${tag.id}`);
+        const articleCount = tag.attributes.articles?.data.length || 0;
+        expect(tagCard).toHaveTextContent(`${articleCount} article${articleCount !== 1 ? 's' : ''}`);
+      });
+    });
+
+    /**
+     * Test case: Verify that TagCard components have the correct styling
+     */
+    it('applies correct styling to TagCard components', async () => {
+      // Arrange: Mock the API response
+      global.serverMock.onGet('/api/tags').reply(200, { data: mockSeveralTags });
+
+      // Act: Render the Tags component
+      render(await Tags({}));
+
+      // Assert: Check if each TagCard has the correct styling classes
+      mockSeveralTags.forEach((tag) => {
+        const tagCard = screen.getByTestId(`tag-card-${tag.id}`);
+        expect(tagCard).toHaveClass('bg-white', 'dark:bg-gray-800', 'rounded-lg', 'shadow-md', 'p-6');
+      });
+    });
+    /**
+     * Test case: Verify the metadata of the Tags page (currently commented out)
+     * TODO: Uncomment and implement this test when metadata testing is required
+     */
+    // it('has correct metadata', () => {
+    //   // Arrange: Define expected metadata values
+    //   const expectedTitle = 'Aniss.dev | Les tags';
+    //   const expectedDescription = 'Explorez ici les differenttes thématiques abordées sur le blog.';
+
+    //   // Act: Get actual metadata
+    //   const actualMetadata = metadata;
+
+    //   // Assert: Check if metadata matches expected values
+    //   expect(actualMetadata.title).toBe(expectedTitle);
+    //   expect(actualMetadata.description).toBe(expectedDescription);
+    //   expect(actualMetadata.openGraph?.title).toBe(expectedTitle);
+    //   expect(actualMetadata.openGraph?.description).toBe(expectedDescription);
+    //   expect(actualMetadata.openGraph?.siteName).toBe('Aniss.dev');
+    //   expect(actualMetadata.twitter?.title).toBe(expectedTitle);
+    //   expect(actualMetadata.twitter?.description).toBe(expectedDescription);
+    // });
   });
-
-  /**
-   * Test case: Verify the metadata of the Tags page (currently commented out)
-   * TODO: Uncomment and implement this test when metadata testing is required
-   */
-  // it('has correct metadata', () => {
-  //   // Arrange: Define expected metadata values
-  //   const expectedTitle = 'Aniss.dev | Les tags';
-  //   const expectedDescription = 'Explorez ici les differenttes thématiques abordées sur le blog.';
-
-  //   // Act: Get actual metadata
-  //   const actualMetadata = metadata;
-
-  //   // Assert: Check if metadata matches expected values
-  //   expect(actualMetadata.title).toBe(expectedTitle);
-  //   expect(actualMetadata.description).toBe(expectedDescription);
-  //   expect(actualMetadata.openGraph?.title).toBe(expectedTitle);
-  //   expect(actualMetadata.openGraph?.description).toBe(expectedDescription);
-  //   expect(actualMetadata.openGraph?.siteName).toBe('Aniss.dev');
-  //   expect(actualMetadata.twitter?.title).toBe(expectedTitle);
-  //   expect(actualMetadata.twitter?.description).toBe(expectedDescription);
-  // });
 });
