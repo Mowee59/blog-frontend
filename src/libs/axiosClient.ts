@@ -1,26 +1,19 @@
 /**
- *
- * This file is used to define api request that will be used for client side requests
- *
+ * This file is used to define API requests that will be used for client-side requests.
  */
 
-import axios from "axios";
-import { Article } from "@/interfaces/Article";
-import { BlogHomePage } from "@/interfaces/Blog-home-page";
-import { Payload } from "@/interfaces/Payload";
-import { Tag } from "@/interfaces/Tag";
 import { QueryFunction, QueryFunctionContext } from "@tanstack/react-query";
 import { infiniteQueryFormatedData } from "@/interfaces/InfiniteQueryFormatedData";
-import { apiClient } from './axiosConfig';
+import { apiClient } from "./axiosConfig";
 
-//Number of article per page
+// Number of articles per page
 const PAGE_SIZE = 2;
 
-
 /**
+ * Fetches articles from the API with pagination and populates related data.
  *
- * @param Options An object with the page param that defines the current page
- * @returns
+ * @param {QueryFunctionContext<[string, string], number>} context - The context object containing page parameters and query key.
+ * @returns {Promise<infiniteQueryFormatedData>} The formatted data including articles, current page, and next page if available. This format is directly used by react-query infinite query hook.
  */
 export const fetchArticles: QueryFunction<
   infiniteQueryFormatedData,
@@ -39,7 +32,7 @@ export const fetchArticles: QueryFunction<
   return {
     data: response.data,
     currentPage: pageParam,
-    // if the number of pages is greate that the current apge, next page is current page + 1 otherwise we return null
+    // If the number of pages is greater than the current page, next page is current page + 1, otherwise return null
     nextPage:
       response.data.meta.pagination.pageCount > pageParam
         ? pageParam + 1

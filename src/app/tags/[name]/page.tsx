@@ -84,7 +84,7 @@ export async function generateMetadata({ params }: { params: { name: string } })
 }
 
 
-// TODO Handle 404
+
 // Generate page on demand if path hasn't been regenerated yet
 export const dynamicParams = true;
 

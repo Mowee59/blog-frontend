@@ -1,34 +1,19 @@
-import { Article } from "@/interfaces/Article";
-import { BlogHomePage } from "@/interfaces/Blog-home-page";
-import { Payload } from "@/interfaces/Payload";
-import { Tag } from "@/interfaces/Tag";
-import axios, { AxiosResponse } from "axios";
-import { apiServer } from "./axiosConfig";
-import { About } from "@/interfaces/About";
-
 /**
  *
  * This file is used to define api request that will be used for server side requests
  *
  */
 
-// // Add Axios interceptor for adding the authorization token
-// apiClient.interceptors.request.use(
-//   (config) => {
-//     // Access the token from the environment variable
-//     const token = process.env.STRAPI_API_TOKEN;
 
-//     if (token) {
-//       // Add the token to the Authorization header if it exists
-//       config.headers.Authorization = `Bearer ${token}`;
-//     }
+import { Article } from "@/interfaces/Article";
+import { BlogHomePage } from "@/interfaces/Blog-home-page";
+import { Payload } from "@/interfaces/Payload";
+import { Tag } from "@/interfaces/Tag";
+import { AxiosResponse } from "axios";
+import { apiServer } from "./axiosConfig";
+import { About } from "@/interfaces/About";
 
-//     return config;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   },
-// );
+
 
 /**
  * Fetch all the articles

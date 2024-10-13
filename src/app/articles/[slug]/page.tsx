@@ -26,8 +26,6 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   // Fetch the article data using the slug from the URL parameters
   const articlePayload = await fetchArticleBySlug(params.slug);
- 
-  
 
   // Check if the article exists
   if (!articlePayload.data || articlePayload.data.length === 0) {
@@ -40,7 +38,6 @@ export async function generateMetadata({
 
   const article = articlePayload.data[0];
   const seo = article.attributes.seo;
-  
 
   // If there's no SEO data, return basic metadata
   if (!seo) {
@@ -112,15 +109,13 @@ export async function generateMetadata({
   };
 }
 
-// revalidatethe page every 600 secondes ( 10 min), ISR
-// TODO ; Use a webhook instead
-// export const revalidate = 600;
 
-// TODO Handle 404
+
+
 // Generate page on demand if path hasn't been regenerated yet
 export const dynamicParams = true;
 
-const page = async ({ params }: { params: { slug: string } }) => {
+const Article = async ({ params }: { params: { slug: string } }) => {
   try {
     // Retrieving the article as a strapi payload
     const articlePayload = await fetchArticleBySlug(params.slug);
@@ -186,4 +181,4 @@ const page = async ({ params }: { params: { slug: string } }) => {
   }
 };
 
-export default page;
+export default Article;
