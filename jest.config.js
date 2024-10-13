@@ -18,6 +18,7 @@ const config = {
     '^@/libs/(.*)$': '<rootDir>/src/libs/$1',
     '^@/interfaces/(.*)$': '<rootDir>/src/interfaces/$1',
   },
+  
 }
 
 module.exports = createJestConfig(config)

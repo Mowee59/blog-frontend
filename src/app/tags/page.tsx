@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Aniss.dev | Les tags",
   description: "Explorez ici les differenttes thématiques abordées sur le blog.",
   openGraph: {
-    title: "TAniss.dev | Les tags",
+    title: "Aniss.dev | Les tags",
     description: "Explorez ici les differenttes thématiques abordées sur le blog.",
     type: "website",
   },
