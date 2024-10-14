@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ArticleCard matches snapshot 1`] = `
+exports[`ArticleCard unit tests matches snapshot 1`] = `
 <DocumentFragment>
   <a
     href="/articles/article-test"
