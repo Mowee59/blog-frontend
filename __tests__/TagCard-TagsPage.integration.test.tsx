@@ -1,18 +1,12 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import Tags from "../src/app/tags/page";
 import { fetchTags } from "@/libs/axiosServer";
 import { mockSeveralTags } from "../__mocks__/mockSeveralTags";
-import TagCard from "@/components/ui/tag-card/TagCard";
-import { generateMetadata } from "../src/app/tags/[name]/page";
-import { fetchTagByName } from "@/libs/axiosServer";
 
 // Mock the fetchTags function
 jest.mock("@/libs/axiosServer", () => ({
   fetchTags: jest.fn(),
 }));
-
-
 
 // Mock the fetchTags function to return mockSeveralTags
 (fetchTags as jest.Mock).mockResolvedValue({ data: mockSeveralTags });
@@ -124,6 +118,4 @@ describe("Tags Page and TagCard Integration Tests", () => {
     // Assert: Check if the rendered component matches the snapshot
     expect(asFragment()).toMatchSnapshot();
   });
-
- 
 });
