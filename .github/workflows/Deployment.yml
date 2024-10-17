@@ -1,5 +1,5 @@
 # Workflow name
-name: Test, Build, Push, and Deploy Docker Image
+name: Deployment workflow
 
 # Trigger the workflow on push to the main branch
 on:
