@@ -7,7 +7,6 @@ on:
     branches:
       - main
 
-
 # Environment variables used throughout the workflow
 env:
   REGISTRY: ghcr.io # GitHub Container Registry
@@ -80,22 +79,3 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:latest
             ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:${{ steps.package-version.outputs.VERSION }}
           labels: ${{ steps.meta.outputs.labels }} # Labels extracted in the previous step
-
-  deploy:
-    needs: build-and-push # This job will only run if the build-and-push job succeeds
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Deploy to VPS
-        env:
-          VPS_SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
-          VPS_HOST: ${{ secrets.VPS_HOST }}
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_SSH_PORT: ${{ secrets.VPS_SSH_PORT }}
-        run: |
-          echo "$VPS_SSH_PRIVATE_KEY" > vps_ssh_key
-          chmod 600 vps_ssh_key
-          ssh -i vps_ssh_key -p $VPS_SSH_PORT -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST '
-            cd /home/torka/monSite &&  docker-compose up -d
-          '
-          rm vps_ssh_key
