@@ -71,7 +71,7 @@ Create a `.env.local` file in the root directory and add the following variables
 | STRAPI_URL | The URL of your Strapi backend (e.g., https://strapi.example.com) |
 | WEBHOOK_SECRET | A secret key used for webhook authentication |
 | NEXT_PUBLIC_SITE_URL | The public URL of your Next.js frontend (e.g., https://www.example.com) |
-| MEASUREMENT_ID | Your Google Analytics measurement ID (e.g., G-XXXXXXXXXX) |
+| NEXT_PUBLIC_MEASUREMENT_ID | Your Google Analytics measurement ID (e.g., G-XXXXXXXXXX) |
 
 ### Running the Application
 
