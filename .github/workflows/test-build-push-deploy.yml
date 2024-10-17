@@ -1,4 +1,4 @@
- # Workflow name
+# Workflow name
 name: Test, Build, Push, and Deploy Docker Image
 
 # Trigger the workflow on push to the main branch
@@ -49,7 +49,12 @@ jobs:
           echo "REPO_LOWER=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
           echo "OWNER_LOWER=${GITHUB_REPOSITORY_OWNER,,}" >>${GITHUB_ENV}
 
-      # Step 3: Log in to the GitHub Container Registry
+      # Step 3: Get version from package.json
+      - name: Get version from package.json
+        id: package-version
+        run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+      # Step 4: Log in to the GitHub Container Registry
       - name: Log in to the Container registry
         uses: docker/login-action@v2
         with:
@@ -57,14 +62,14 @@ jobs:
           username: ${{ github.actor }} # GitHub username running the workflow
           password: ${{ secrets.GITHUB_TOKEN }} # Automatically provided GitHub token
 
-      # Step 4: Extract metadata for Docker
+      # Step 5: Extract metadata for Docker
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}
 
-      # Step 5: Build and push the Docker image
+      # Step 6: Build and push the Docker image
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
@@ -72,7 +77,7 @@ jobs:
           push: true # Push the image to the registry
           tags: | # Tags for the Docker image
             ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:latest
-            ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:${{ steps.package-version.outputs.VERSION }}
           labels: ${{ steps.meta.outputs.labels }} # Labels extracted in the previous step
 
   deploy:
