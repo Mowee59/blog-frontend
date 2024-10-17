@@ -31,6 +31,7 @@ jobs:
       - name: Run tests
         run: yarn test
 
+  # Build the Docker image
   build:
     needs: test # This job will only run if the test job succeeds
     runs-on: ubuntu-latest
@@ -71,6 +72,7 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:${{ steps.package-version.outputs.VERSION }}
           labels: ${{ steps.meta.outputs.labels }} # Labels extracted in the previous step
 
+  # Push the Docker image to the GitHub Container Registry
   push:
     needs: build # This job will only run if the build job succeeds
     runs-on: ubuntu-latest
@@ -97,6 +99,7 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:${{ steps.package-version.outputs.VERSION }}
           labels: ${{ steps.meta.outputs.labels }} # Labels extracted in the previous step
 
+  # Deploy the Docker image to the VPS
   deploy:
     needs: push # This job will only run if the push job succeeds
     runs-on: ubuntu-latest
