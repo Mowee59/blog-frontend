@@ -16,8 +16,13 @@ RUN yarn install --frozen-lockfile
 # Rebuild the source code only when needed
 FROM base AS builder
 
+# Strapi
 ARG STRAPI_URL=https://strapi.aniss.dev
 ENV STRAPI_URL=${STRAPI_URL}
+
+# Google Analytics
+ARG NEXT_PUBLIC_MEASUREMENT_ID
+ENV NEXT_PUBLIC_MEASUREMENT_ID=${NEXT_PUBLIC_MEASUREMENT_ID}
 
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
