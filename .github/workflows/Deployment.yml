@@ -48,7 +48,6 @@ jobs:
         run: |
           echo "REPO_LOWER=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
           echo "OWNER_LOWER=${GITHUB_REPOSITORY_OWNER,,}" >>${GITHUB_ENV}
-
       # Step 3: Get version from package.json
       - name: Get version from package.json
         id: package-version
@@ -74,7 +73,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: . # Build context is the root of the repository
-          push: true # Push the image to the registry
+          push: ${{ github.event_name != 'status' }} # Push the image to the registry only if not running a status check
           tags: | # Tags for the Docker image
             ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:latest
             ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:${{ steps.package-version.outputs.VERSION }}
