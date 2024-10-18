@@ -21,6 +21,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 
+// Assuming you have a function to fetch the blog home page data
+import { fetchHomePageData } from "@/libs/axiosServer"; // You'll need to implement this function
+
 /**
  * Handles POST requests for revalidating pages.
  * This function is triggered by a webhook to update cached pages when content changes.
@@ -44,12 +47,29 @@ export async function POST(request: NextRequest) {
       // Revalidate the article page
       revalidatePath(`/articles/${slug}`);
       revalidatePath("/tags"); // So we have the right articles counts on the tags
+
+      // Check if this article is the featured article on the home page
+      const blogHomePage = await fetchHomePageData();
+      if (blogHomePage.data.attributes.featuredArticle && 
+          (blogHomePage.data.attributes.featuredArticle.data.attributes.slug === slug )) {
+        // If the article is featured, also revalidate the home page
+        revalidatePath("/");
+      }
+
       return NextResponse.json({ revalidated: true, now: Date.now() });
     } else if (model === "tag") {
       const name = body.entry.name;
       // Revalidate the tag page and the tags index page
       revalidatePath(`/tags/${name}`);
       revalidatePath("/tags");
+      return NextResponse.json({ revalidated: true, now: Date.now() });
+    } else if (model === "blog-home-page") {
+      // Revalidate the home page
+      revalidatePath("/");
+      return NextResponse.json({ revalidated: true, now: Date.now() });
+    } else if (model === "about") {
+      // Revalidate the about page
+      revalidatePath("/about");
       return NextResponse.json({ revalidated: true, now: Date.now() });
     } else {
       // Return an error for unsupported models
