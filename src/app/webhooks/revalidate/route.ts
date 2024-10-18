@@ -20,10 +20,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
-
-// Assuming you have a function to fetch the blog home page data
-import { fetchHomePageData } from "@/libs/axiosServer"; // You'll need to implement this function
-
+import { fetchHomePageData } from "@/libs/axiosServer"; 
 /**
  * Handles POST requests for revalidating pages.
  * This function is triggered by a webhook to update cached pages when content changes.
