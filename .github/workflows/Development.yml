@@ -4,11 +4,11 @@ name: Development workflow
 # Trigger the workflow on push to the main branch
 on:
   push:
-    branches-ignore:
-      - main
+    branches:
+      - develop
   pull_request:
     branches:
-      - main
+      - develop
 
 # Environment variables used throughout the workflow
 env:
@@ -59,7 +59,7 @@ jobs:
 
   build:
     needs: [test, versioning]
-    # This condition ensures that the build job always runs, but only if the test job succeeded
+    # This condition ensures that the build job always runs, but only proceeds if the test job succeeded
     # and the versioning job either succeeded or was skipped.
     if: always() && (needs.test.result == 'success') && (needs.versioning.result == 'success' || needs.versioning.result == 'skipped')
     runs-on: ubuntu-latest
