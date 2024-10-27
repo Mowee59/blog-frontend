@@ -47,7 +47,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     outputs:
-      new_release_version: ${{ steps.semantic.outputs.release-version }}
+      git_tag: ${{ steps.semantic.outputs.git-tag }}
 
   build-and-push:
     needs: versioning
@@ -83,7 +83,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}
           tags: |
             type=raw,value=latest
-            type=raw,value=${{ needs.versioning.outputs.new_release_version }}
+            type=raw,value=${{ needs.versioning.outputs.git_tag }}
 
       # Step 5: Build and push Docker image
       - name: Build and push Docker image
