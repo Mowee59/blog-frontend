@@ -1,3 +1,11 @@
+## [1.1.5](https://github.com/Mowee59/blog-frontend/compare/v1.1.4...v1.1.5) (2024-10-27)
+
+
+### Bug Fixes
+
+* **workflow:** output release version to environment variable ([a5cebba](https://github.com/Mowee59/blog-frontend/commit/a5cebba6865afa7551b3e67b6cbe9e1a03800812))
+* **workflow:** update semantic-release action and output release version ([b114d08](https://github.com/Mowee59/blog-frontend/commit/b114d08b98bbb65948666ea1a5909c0560880b51))
+
 ## [1.1.4](https://github.com/Mowee59/blog-frontend/compare/v1.1.3...v1.1.4) (2024-10-27)
 
 
