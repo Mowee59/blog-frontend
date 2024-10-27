@@ -1,3 +1,10 @@
+## [1.1.6](https://github.com/Mowee59/blog-frontend/compare/v1.1.5...v1.1.6) (2024-10-27)
+
+
+### Bug Fixes
+
+* correct output variable names in deployment workflow ([12363df](https://github.com/Mowee59/blog-frontend/commit/12363dfc4a45e4a5e2e6467212f62936255a62cf))
+
 ## [1.1.5](https://github.com/Mowee59/blog-frontend/compare/v1.1.4...v1.1.5) (2024-10-27)
 
 
