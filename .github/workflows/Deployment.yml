@@ -34,8 +34,7 @@ jobs:
   versioning:
     needs: test
     runs-on: ubuntu-latest
-    outputs:
-      new_release_version: ${{ steps.semantic.outputs.new_release_version }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -47,6 +46,8 @@ jobs:
         uses: cycjimmy/semantic-release-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    outputs:
+      new_release_version: ${{ steps.semantic.outputs.release-version }}
 
   build-and-push:
     needs: versioning
