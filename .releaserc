@@ -1,18 +1,6 @@
 {
   "branches": [
-    "main",
-    {
-      "name": "develop",
-      "prerelease": "beta"
-    },
-    {
-      "name": "feature/*",
-      "prerelease": true
-    },
-    {
-      "name": "hotfix/*",
-      "prerelease": true
-    }
+    "main"
   ],
   "plugins": [
     "@semantic-release/commit-analyzer",
@@ -21,5 +9,4 @@
     "@semantic-release/git",
     "@semantic-release/github"
   ]
-
 }
