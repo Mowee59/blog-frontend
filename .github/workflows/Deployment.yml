@@ -58,7 +58,9 @@ jobs:
       - name: Get release version
         id: version
         if: steps.semantic-release.outcome == 'success'
-        run: echo "RELEASE_VERSION=$(npx semantic-release --dry-run | grep -oP '(?<=version )[^ ]*')" >> $GITHUB_ENV
+        run: |
+          VERSION=$(npx semantic-release --dry-run | grep -oP '(?<=version )[^ ]*')
+          echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Log the new version
         run: echo "The new version is ${{ env.RELEASE_VERSION }}"
