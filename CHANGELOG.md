@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/Mowee59/blog-frontend/compare/v1.1.2...v1.1.3) (2024-10-27)
+
+
+### Bug Fixes
+
+* **workflow:** correct Docker image version tagging ([c3b60f2](https://github.com/Mowee59/blog-frontend/commit/c3b60f2cf3613c124bd8ae4cf6a01e3b160e418d))
+
 ## [1.1.2](https://github.com/Mowee59/blog-frontend/compare/v1.1.1...v1.1.2) (2024-10-27)
 
 
