@@ -73,7 +73,7 @@ jobs:
       # Step 3: Get version from package.json
       - name: Get version from package.json
         id: package-version
-        run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
 
       # Step 4: Log in to the GitHub Container Registry
       - name: Log in to the Container registry
@@ -98,7 +98,7 @@ jobs:
           push: ${{ github.event_name != 'status' }} # Push the image to the registry only if not running a status check
           tags: | # Tags for the Docker image
             ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:latest
-            ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:${{ steps.package-version.outputs.VERSION }}
+            ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:${{ steps.package-version.outputs.current-version}}
           labels: ${{ steps.meta.outputs.labels }} # Labels extracted in the previous step
 
   deploy:
