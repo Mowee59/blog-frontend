@@ -73,11 +73,8 @@ jobs:
       - name: Build Docker image
         uses: docker/build-push-action@v4
         with:
-          context: .
-          push: false
-          load: true
-          tags: myapp:test
-
-      - name: Test Docker image
-        run: |
-          docker run --rm myapp:test echo "Docker image built successfully"
+          context: . # Build context is the root of the repository
+          push: ${{ github.event_name == 'push' }} # Only push the image on push events: true if push event, false if pull request
+          tags: | # Tags for the Docker image
+            ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:develop
+          labels: ${{ steps.meta.outputs.labels }} # Labels extracted in the previous step
