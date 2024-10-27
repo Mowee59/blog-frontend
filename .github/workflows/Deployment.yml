@@ -34,36 +34,19 @@ jobs:
   versioning:
     needs: test
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      RELEASE_VERSION: ""
+    outputs:
+      new_release_version: ${{ steps.semantic.outputs.new_release_version }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "20"
-
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Run semantic-release
-        id: semantic-release
-        run: npx semantic-release
-
-      - name: Get release version
-        id: version
-        if: steps.semantic-release.outcome == 'success'
-        run: |
-          VERSION=$(npx semantic-release --dry-run | grep -oP '(?<=version )[^ ]*')
-          echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
-
-      - name: Log the new version
-        run: echo "The new version is ${{ env.RELEASE_VERSION }}"
+      - name: Semantic Release
+        id: semantic
+        uses: cycjimmy/semantic-release-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-and-push:
     needs: versioning
@@ -91,22 +74,23 @@ jobs:
           username: ${{ github.actor }} # GitHub username running the workflow
           password: ${{ secrets.GITHUB_TOKEN }} # Automatically provided GitHub token
 
-      # Step 4: Extract metadata for Docker
+      # Step 4: Extract metadata (tags, labels) for Docker
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}
+          tags: |
+            type=raw,value=latest
+            type=raw,value=${{ needs.versioning.outputs.new_release_version }}
 
-      # Step 5: Build and push the Docker image
+      # Step 5: Build and push Docker image
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: . # Build context is the root of the repository
           push: ${{ github.event_name != 'status' }} # Push the image to the registry only if not running a status check
-          tags: | # Tags for the Docker image
-            ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:latest
-            ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:${{ env.RELEASE_VERSION }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }} # Labels extracted in the previous step
 
   deploy:
