@@ -30,7 +30,6 @@ export async function purgeCloudflareCache(urls: string[]): Promise<void> {
     const response = await cloudflareApi.post("/purge_cache", {
       files: urls,
     });
-
     
     // Check if the cache purge was successful
     if (response.data.success) {
