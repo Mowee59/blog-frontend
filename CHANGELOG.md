@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/Mowee59/blog-frontend/compare/v1.1.1...v1.1.2) (2024-10-27)
+
+
+### Bug Fixes
+
+* **release:** update semantic release configuration for git plugin ([87047d8](https://github.com/Mowee59/blog-frontend/commit/87047d854c8ff5c520abde5b6947b7e821157d6d))
+
 ## [1.1.1](https://github.com/Mowee59/blog-frontend/compare/v1.1.0...v1.1.1) (2024-10-27)
 
 
