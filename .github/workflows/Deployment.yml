@@ -95,7 +95,7 @@ jobs:
           push: ${{ github.event_name != 'status' }} # Push the image to the registry only if not running a status check
           tags: | # Tags for the Docker image
             ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:latest
-            ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:${{ steps.semantic-release.outputs.new-release-version }}
+            ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:${{ env.RELEASE_VERSION }}
           labels: ${{ steps.meta.outputs.labels }} # Labels extracted in the previous step
 
   deploy:

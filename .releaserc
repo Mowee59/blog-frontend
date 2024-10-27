@@ -13,6 +13,12 @@
       {
         "assets": ["package.json",  "CHANGELOG.md"]
       }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "echo 'RELEASE_VERSION=${nextRelease.version}' >> $GITHUB_ENV"
+      }
     ]
   ]
 }
