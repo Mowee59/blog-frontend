@@ -40,7 +40,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: codfish/semantic-release-action@v3
+      - name: Run semantic-release
+        uses: codfish/semantic-release-action@v3
         id: semantic
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
