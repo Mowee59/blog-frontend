@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/Mowee59/blog-frontend/compare/v1.1.0...v1.1.1) (2024-10-27)
+
+
+### Bug Fixes
+
+* **release:** add missing npm plugin to semantic release configuration ([5c10875](https://github.com/Mowee59/blog-frontend/commit/5c108755280ed803407c9675b60f800ed721176a))
+
 # [1.1.0](https://github.com/Mowee59/blog-frontend/compare/v1.0.0...v1.1.0) (2024-10-27)
 
 
