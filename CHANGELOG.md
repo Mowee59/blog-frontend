@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/Mowee59/blog-frontend/compare/v1.1.3...v1.1.4) (2024-10-27)
+
+
+### Bug Fixes
+
+* update Docker image tagging to use semantic-release version ([4c17255](https://github.com/Mowee59/blog-frontend/commit/4c17255c480a2999e6b98709543a1478285f8f24))
+
 ## [1.1.3](https://github.com/Mowee59/blog-frontend/compare/v1.1.2...v1.1.3) (2024-10-27)
 
 
