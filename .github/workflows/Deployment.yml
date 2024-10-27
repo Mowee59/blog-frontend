@@ -61,6 +61,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Output git_tag for debugging
+        run: echo " ${{ needs.versioning.outputs.git_tag }}"
+
       # Step 2: Convert the repository name and owner to lowercase
       - name: Lowercase the repo name and owner
         run: |
