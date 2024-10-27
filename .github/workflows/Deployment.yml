@@ -36,6 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      RELEASE_VERSION: ""
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3

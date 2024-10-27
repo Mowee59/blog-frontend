@@ -13,6 +13,7 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "strapi.aniss.dev",
+        
       }
     ],
   },
