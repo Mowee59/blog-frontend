@@ -31,6 +31,7 @@ export async function purgeCloudflareCache(urls: string[]): Promise<void> {
       files: urls,
     });
 
+    
     // Check if the cache purge was successful
     if (response.data.success) {
       console.log("Cloudflare cache purged successfully");
