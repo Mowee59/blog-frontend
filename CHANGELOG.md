@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/Mowee59/blog-frontend/compare/v1.0.0...v1.1.0) (2024-10-27)
+
+
+### Features
+
+* **cloudflare:** add cache purging functionality ([7314862](https://github.com/Mowee59/blog-frontend/commit/7314862c549b8e771bf3831dcc80a15a1f992ffc))
+
 # 1.0.0 (2024-10-24)
 
 
