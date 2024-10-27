@@ -16,12 +16,6 @@
           "CHANGELOG.md"
         ]
       }
-    ],
-    [
-      "@semantic-release/exec",
-      {
-        "prepareCmd": "echo 'RELEASE_VERSION=${nextRelease.version}' >> $GITHUB_ENV && export RELEASE_VERSION=${nextRelease.version}"
-      }
     ]
   ]
 }

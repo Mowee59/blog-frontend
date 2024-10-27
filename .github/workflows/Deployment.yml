@@ -53,6 +53,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx semantic-release
+      
+        - name: Get release version
+        id: version
+        if: steps.release.outcome == 'success'
+        run: echo "RELEASE_VERSION=$(npx semantic-release --dry-run | grep -oP '(?<=version )[^ ]*')" >> $GITHUB_ENV
+
+      - name: Log the new version
+        run: echo "The new version is ${{ env.RELEASE_VERSION }}"
 
   build-and-push:
     needs: versioning
