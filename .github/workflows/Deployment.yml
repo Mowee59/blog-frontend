@@ -40,25 +40,19 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: yarn install
+
       - name: Run semantic-release
-        uses: codfish/semantic-release-action@v3
-        id: semantic
+        id: semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: "20"
-
-      # - name: Install dependencies
-      #   run: yarn install
-
-      # - name: Run semantic-release
-      #   id: semantic-release
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: npx semantic-release
+        run: npx semantic-release
 
   build-and-push:
     needs: versioning
@@ -101,7 +95,7 @@ jobs:
           push: ${{ github.event_name != 'status' }} # Push the image to the registry only if not running a status check
           tags: | # Tags for the Docker image
             ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:latest
-            ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:${{ steps.semantic.outputs.release-version }}
+            ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:${{ env.RELEASE_VERSION }}
           labels: ${{ steps.meta.outputs.labels }} # Labels extracted in the previous step
 
   deploy:
