@@ -11,13 +11,16 @@
     [
       "@semantic-release/git",
       {
-        "assets": ["package.json",  "CHANGELOG.md"]
+        "assets": [
+          "package.json",
+          "CHANGELOG.md"
+        ]
       }
     ],
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "echo 'RELEASE_VERSION=${nextRelease.version}' >> $GITHUB_ENV"
+        "prepareCmd": "echo 'RELEASE_VERSION=${nextRelease.version}' >> $GITHUB_ENV && export RELEASE_VERSION=${nextRelease.version}"
       }
     ]
   ]
