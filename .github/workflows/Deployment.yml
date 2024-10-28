@@ -34,7 +34,10 @@ jobs:
   versioning:
     needs: test
     runs-on: ubuntu-latest
-
+    outputs:
+      new_release_version: ${{ steps.semantic.outputs.new_release_version }}
+      last_release_version: ${{ steps.semantic.outputs.last_release_version }}
+      new_release_published: ${{ steps.semantic.outputs.new_release_published }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -46,23 +49,21 @@ jobs:
         uses: cycjimmy/semantic-release-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    outputs:
-      git_tag: ${{ steps.semantic.outputs.git-tag }}
 
   build-and-push:
     needs: versioning
     runs-on: ubuntu-latest
     permissions:
-      contents: read # Permission to read repository contents
-      packages: write # Permission to write packages (for pushing Docker images)
+      contents: read
+      packages: write
 
     steps:
       # Step 1: Check out the repository code
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Output git_tag for debugging
-        run: echo " ${{ needs.versioning.outputs.git_tag }}"
+      - name: Output git-tag for debugging
+        run: echo " ${{ needs.versioning.outputs.git-tag }}"
 
       # Step 2: Convert the repository name and owner to lowercase
       - name: Lowercase the repo name and owner
@@ -86,16 +87,16 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}
           tags: |
             type=raw,value=latest
-            type=raw,value=${{ needs.versioning.outputs.git_tag }}
+            type=raw,value=${{ needs.versioning.outputs.new_release_published == 'true' && needs.versioning.outputs.new_release_version || needs.versioning.outputs.last_release_version }}
 
       # Step 5: Build and push Docker image
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: . # Build context is the root of the repository
-          push: ${{ github.event_name != 'status' }} # Push the image to the registry only if not running a status check
+          context: .
+          push: ${{ github.event_name != 'status' }}
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }} # Labels extracted in the previous step
+          labels: ${{ steps.meta.outputs.labels }}
 
   deploy:
     needs: build-and-push # This job will only run if the build-and-push job succeeds
