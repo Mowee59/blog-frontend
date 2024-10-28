@@ -51,9 +51,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: ECho last release version
+      - name: ECho last new release published boolean
         run: |
-          echo ${{ steps.semantic.outputs.last_release_version }}
+          echo ${{ steps.semantic.outputs.new_release_published }}
 
   build-and-push:
     needs: versioning
