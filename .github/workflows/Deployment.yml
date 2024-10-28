@@ -51,6 +51,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: ECho last release version
+        run: |
+          echo ${{ steps.semantic.outputs.last_release_version }}
+
   build-and-push:
     needs: versioning
     runs-on: ubuntu-latest
