@@ -36,13 +36,17 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       new_release_version: ${{ steps.semantic.outputs.new_release_version }}
-      last_release_version: ${{ steps.semantic.outputs.last_release_version }}
       new_release_published: ${{ steps.semantic.outputs.new_release_published }}
+      version: ${{ steps.package-version.outputs.version }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
+      - name: Get version from package.json
+        id: package-version
+        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
 
       - name: Semantic Release
         id: semantic
@@ -50,10 +54,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: ECho last new release published boolean
-        run: |
-          echo ${{ steps.semantic.outputs.new_release_published }}
 
   build-and-push:
     needs: versioning
@@ -67,8 +67,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Output git-tag for debugging
-        run: echo " ${{ needs.versioning.outputs.new_release_version }} ${{ needs.versioning.outputs.last_release_version }}"
 
       # Step 2: Convert the repository name and owner to lowercase
       - name: Lowercase the repo name and owner
@@ -92,7 +90,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}
           tags: |
             type=raw,value=latest
-            type=raw,value=${{ needs.versioning.outputs.new_release_published == 'true' && needs.versioning.outputs.new_release_version || needs.versioning.outputs.last_release_version }}
+            type=raw,value=${{ needs.versioning.outputs.new_release_published == 'true' && needs.versioning.outputs.new_release_version || needs.versioning.outputs.version }}
 
       # Step 5: Build and push Docker image
       - name: Build and push Docker image
