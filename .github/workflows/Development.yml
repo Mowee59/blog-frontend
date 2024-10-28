@@ -1,7 +1,7 @@
 # Workflow name
 name: Development workflow
 
-# Trigger the workflow on push to the main branch
+# Trigger the workflow on push to the develop branch or pull request to the develop branch
 on:
   push:
     branches:
@@ -76,8 +76,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: . # Build context is the root of the repository
-          push: ${{ github.event_name != 'status' }} # Push the image to the registry only if not running a status check
+          push: ${{ github.ref == 'refs/heads/develop' }} # Push the image to the registry only if workflow is triggered by a push to the develop branch
           tags: | # Tags for the Docker image
             ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:develop
           labels: ${{ steps.meta.outputs.labels }} # Labels extracted in the previous step
-
