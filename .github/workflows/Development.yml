@@ -80,3 +80,4 @@ jobs:
           tags: | # Tags for the Docker image
             ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:develop
           labels: ${{ steps.meta.outputs.labels }} # Labels extracted in the previous step
+
