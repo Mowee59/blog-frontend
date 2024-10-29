@@ -41,6 +41,7 @@ export interface Tag {
     localizations?: { data: Tag[] };
   };
 }
+
 export interface Tag_Plain {
   id: number;
   createdAt: Date | string;
