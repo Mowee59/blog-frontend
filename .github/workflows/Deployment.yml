@@ -34,48 +34,47 @@ jobs:
   versioning:
     needs: test
     runs-on: ubuntu-latest
+    outputs:
+      new_release_version: ${{ steps.semantic.outputs.new_release_version }}
+      new_release_published: ${{ steps.semantic.outputs.new_release_published }}
+      version: ${{ steps.package-version.outputs.version }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "20"
+      - name: Get version from package.json
+        id: package-version
+        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
 
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Run semantic-release
+      - name: Semantic Release
+        id: semantic
+        uses: cycjimmy/semantic-release-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   build-and-push:
     needs: versioning
     runs-on: ubuntu-latest
     permissions:
-      contents: read # Permission to read repository contents
-      packages: write # Permission to write packages (for pushing Docker images)
+      contents: read
+      packages: write
 
     steps:
       # Step 1: Check out the repository code
       - name: Checkout repository
         uses: actions/checkout@v3
 
+
       # Step 2: Convert the repository name and owner to lowercase
       - name: Lowercase the repo name and owner
         run: |
           echo "REPO_LOWER=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
           echo "OWNER_LOWER=${GITHUB_REPOSITORY_OWNER,,}" >>${GITHUB_ENV}
-      # Step 3: Get version from package.json
-      - name: Get version from package.json
-        id: package-version
-        run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
 
-      # Step 4: Log in to the GitHub Container Registry
+      # Step 3: Log in to the GitHub Container Registry
       - name: Log in to the Container registry
         uses: docker/login-action@v2
         with:
@@ -83,23 +82,24 @@ jobs:
           username: ${{ github.actor }} # GitHub username running the workflow
           password: ${{ secrets.GITHUB_TOKEN }} # Automatically provided GitHub token
 
-      # Step 5: Extract metadata for Docker
+      # Step 4: Extract metadata (tags, labels) for Docker
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}
+          tags: |
+            type=raw,value=latest
+            type=raw,value=${{ needs.versioning.outputs.new_release_published == 'true' && needs.versioning.outputs.new_release_version || needs.versioning.outputs.version }}
 
-      # Step 6: Build and push the Docker image
+      # Step 5: Build and push Docker image
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: . # Build context is the root of the repository
-          push: ${{ github.event_name != 'status' }} # Push the image to the registry only if not running a status check
-          tags: | # Tags for the Docker image
-            ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:latest
-            ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:${{ steps.package-version.outputs.VERSION }}
-          labels: ${{ steps.meta.outputs.labels }} # Labels extracted in the previous step
+          context: .
+          push: ${{ github.event_name != 'status' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
   deploy:
     needs: build-and-push # This job will only run if the build-and-push job succeeds
