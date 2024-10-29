@@ -1,3 +1,17 @@
+# [1.2.0](https://github.com/Mowee59/blog-frontend/compare/v1.1.6...v1.2.0) (2024-10-29)
+
+
+### Bug Fixes
+
+* **workflow:** correct branch condition for Docker image push ([#19](https://github.com/Mowee59/blog-frontend/issues/19)) ([2cdbbe8](https://github.com/Mowee59/blog-frontend/commit/2cdbbe8cc1b6c43b8726d480d9cdd967e486b409))
+
+
+### Features
+
+* Enhance Footer with Legal Mentions Link ([#20](https://github.com/Mowee59/blog-frontend/issues/20)) ([7f14dfd](https://github.com/Mowee59/blog-frontend/commit/7f14dfd34d51896d9bb7303acb73f8034e155c06))
+* implement Cloudflare cache purging for revalidation webhook ([c5047d4](https://github.com/Mowee59/blog-frontend/commit/c5047d4a1e1bb90e39a8175192b5fae94cd70e05))
+* remove Google Analytics component from layout@ ([#17](https://github.com/Mowee59/blog-frontend/issues/17)) ([794a555](https://github.com/Mowee59/blog-frontend/commit/794a555d61acbcee6abc32a8b9b06858c191d733)), closes [#16](https://github.com/Mowee59/blog-frontend/issues/16)
+
 ## [1.1.6](https://github.com/Mowee59/blog-frontend/compare/v1.1.5...v1.1.6) (2024-10-27)
 
 
