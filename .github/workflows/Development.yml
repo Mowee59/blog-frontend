@@ -76,7 +76,8 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: . # Build context is the root of the repository
-          push: ${{ github.ref == 'refs/heads/develop' }} # Push the image to the registry only if workflow is triggered by a push to the develop branch
+          push: ${{ github.ref_name == 'develop' }} # Push the image to the registry only if workflow is triggered by a push to the develop branch
           tags: | # Tags for the Docker image
             ${{ env.REGISTRY }}/${{ env.OWNER_LOWER }}/${{ github.event.repository.name }}:develop
           labels: ${{ steps.meta.outputs.labels }} # Labels extracted in the previous step
+

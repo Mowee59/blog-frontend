@@ -25,7 +25,6 @@ import Footer from "@/components/ui/footer/Footer";
 import { ThemeProviderComponent } from "@/providers/ThemeProviderComponent";
 import "./globals.css";
 import ReactQueryProviderComponent from "@/providers/ReactQueryProviderComponent";
-import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -48,7 +47,6 @@ export default function RootLayout({
     // Warning: Hydration failed because the initial UI does not match what was returned from the server, because of the theme handling
     <html lang="fr" suppressHydrationWarning>
       <body className={inter.className}>
-        <GoogleAnalytics />
         <ThemeProviderComponent>
           <ReactQueryProviderComponent>
             <Header />
