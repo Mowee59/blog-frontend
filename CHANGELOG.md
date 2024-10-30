@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/Mowee59/blog-frontend/compare/v1.2.0...v1.2.1) (2024-10-30)
+
+
+### Bug Fixes
+
+* update background colors and improve 404 page text ([8286824](https://github.com/Mowee59/blog-frontend/commit/8286824c14bd41477e557ee1d7cc3fb7df340f49))
+
 # [1.2.0](https://github.com/Mowee59/blog-frontend/compare/v1.1.6...v1.2.0) (2024-10-29)
 
 
