@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/Mowee59/blog-frontend/compare/v1.2.2...v1.2.3) (2024-12-06)
+
+
+### Bug Fixes
+
+* update navigation and footer links for improved clarity ([fb6eb65](https://github.com/Mowee59/blog-frontend/commit/fb6eb65f31a8a99a8f866c1a48fe598ebb00da53))
+
 ## [1.2.2](https://github.com/Mowee59/blog-frontend/compare/v1.2.1...v1.2.2) (2024-12-06)
 
 
