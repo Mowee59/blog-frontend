@@ -125,7 +125,7 @@ const TagPage = async ({ params }: { params: { name: string } }) => {
     const coverImage = tag.attributes.cover.data;
 
     return (
-      <main className="container flex flex-col gap-8 lg:max-w-screen-lg">
+      <main className="container flex min-h-screen flex-col gap-8 lg:max-w-screen-lg">
         <div className=" lg:px-10 xl:px-20">
           <h1 className="mb-6 text-2xl font-medium leading-normal text-neutral-900 dark:text-neutral-300 sm:text-4xl sm:leading-10 lg:mb-8 lg:text-5xl xl:text-6xl">
             {`#${tag.attributes.name}`}

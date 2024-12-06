@@ -3,7 +3,7 @@
 exports[`Tags Page and TagCard Integration Tests matches snapshot 1`] = `
 <DocumentFragment>
   <main
-    class="container  lg:max-w-screen-lg"
+    class="container  min-h-screen lg:max-w-screen-lg"
   >
     <section
       class="flex flex-col items-center gap-9 px-6 sm:grid sm:grid-cols-2 sm:gap-10 lg:grid-cols-3"

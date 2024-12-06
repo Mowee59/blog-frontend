@@ -33,10 +33,10 @@ const Header = () => {
 
   const navItems = [
     { href: "/", label: "Accueil" },
-    { href: "https://aniss.dev", label: "Portfolio" },
     { href: "/about", label: "A propos" },
-    { href: "/blog", label: "Blog" },
+    // { href: "/blog", label: "Blog" },
     { href: "/tags", label: "Tags" },
+    { href: "https://aniss.dev", label: "Portfolio" },
   ];
 
   return (
