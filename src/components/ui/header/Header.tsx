@@ -1,22 +1,21 @@
 /*
  * This file is part of the Blog Frontend project.
- * 
+ *
  * Copyright (C) 2024 Aniss.dev
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 
 "use client";
 
@@ -32,6 +31,14 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const navItems = [
+    { href: "/", label: "Accueil" },
+    { href: "https://aniss.dev", label: "Portfolio" },
+    { href: "/about", label: "A propos" },
+    { href: "/blog", label: "Blog" },
+    { href: "/tags", label: "Tags" },
+  ];
+
   return (
     <header className="mb-20 mt-5 sm:mt-10">
       <div className="container flex h-9 items-center justify-between lg:max-w-screen-lg">
@@ -44,27 +51,27 @@ const Header = () => {
           <nav>
             <ul
               className={`${isMenuOpen ? "flex" : "hidden"} fixed inset-0 z-50 flex-col items-center justify-center gap-12 bg-white p-8 text-xl font-medium
-    text-neutral-700 shadow-md dark:bg-gray-800 dark:text-neutral-400 sm:relative sm:inset-auto sm:flex sm:flex-row sm:gap-6 sm:bg-transparent sm:p-0 sm:text-sm sm:shadow-none sm:dark:bg-transparent`}
+              text-neutral-700 shadow-md dark:bg-gray-800 dark:text-neutral-400 sm:relative sm:inset-auto sm:flex sm:flex-row sm:gap-6 sm:bg-transparent sm:p-0 sm:text-sm sm:shadow-none sm:dark:bg-transparent`}
             >
-              <li className="cursor-pointer">
-                <Link href="/about" onClick={() => isMenuOpen ? toggleMenu() : null}>
-                  A propos
-                </Link>
-              </li>
-              <li
-                className="cursor-pointer"
-                onClick={() => isMenuOpen ? toggleMenu() : null}
-              >
-                Blog
-              </li>
-              <li className="cursor-pointer">
-                <Link href={"/tags"} onClick={() => isMenuOpen ? toggleMenu() : null}>
-                  Tags
-                </Link>
-              </li>
+              {navItems.map((item) => (
+                <li key={item.label} className="cursor-pointer">
+                  {item.href === "/blog" ? (
+                    <span onClick={() => isMenuOpen && toggleMenu()}>
+                      {item.label}
+                    </span>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      onClick={() => isMenuOpen && toggleMenu()}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
               {isMenuOpen && (
                 <li
-                  className="cursor-pointer text-neutral-700 sm:hidden "
+                  className="cursor-pointer text-neutral-700 sm:hidden"
                   onClick={toggleMenu}
                 >
                   <Image
