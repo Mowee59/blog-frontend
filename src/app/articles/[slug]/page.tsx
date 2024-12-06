@@ -1,23 +1,21 @@
 /*
  * This file is part of the Blog Frontend project.
- * 
+ *
  * Copyright (C) 2024 Aniss.dev
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
-
 
 import { Metadata } from "next";
 import { fetchArticleBySlug, fetchArticles } from "@/libs/axiosServer";
@@ -130,9 +128,6 @@ export async function generateMetadata({
   };
 }
 
-
-
-
 // Generate page on demand if path hasn't been regenerated yet
 export const dynamicParams = true;
 
@@ -159,7 +154,7 @@ const Article = async ({ params }: { params: { slug: string } }) => {
     const parsedMarkdown = await markdownToHtml(article.attributes.content);
 
     return (
-      <main className="container flex flex-col lg:max-w-screen-lg ">
+      <main className="container flex min-h-screen flex-col lg:max-w-screen-lg ">
         <div className=" lg:px-10 xl:px-20">
           <div className="flex flex-col">
             <div className="flex flex-col gap-6">
