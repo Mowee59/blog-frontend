@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/Mowee59/blog-frontend/compare/v1.2.1...v1.2.2) (2024-12-06)
+
+
+### Bug Fixes
+
+* **header:** improve menu toggle functionality and update navigation links ([2fdafd7](https://github.com/Mowee59/blog-frontend/commit/2fdafd7dd05ea9f4045d57744add651ea1dca4e0))
+
 ## [1.2.1](https://github.com/Mowee59/blog-frontend/compare/v1.2.0...v1.2.1) (2024-10-30)
 
 
