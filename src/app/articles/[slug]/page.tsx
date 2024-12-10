@@ -22,6 +22,7 @@ import { fetchArticleBySlug, fetchArticles } from "@/libs/axiosServer";
 import markdownToHtml from "@/libs/markdownToHtml";
 import React from "react";
 import "@/../public/css/prism.css";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
 /**
@@ -147,6 +148,8 @@ const Article = async ({ params }: { params: { slug: string } }) => {
     // Creating a new Date object from the publishedAt attribute
     const publicationDate = new Date(article.attributes.publishedAt as string);
 
+    const coverImage = article.attributes.coverImage.data;
+
     // The array of tags the article is related with
     const tags = article.attributes.tags?.data ?? [];
 
@@ -155,6 +158,15 @@ const Article = async ({ params }: { params: { slug: string } }) => {
 
     return (
       <main className="container flex min-h-screen flex-col lg:max-w-screen-lg ">
+        <div className="relative mx-auto  mb-8 h-[340px] w-full lg:h-[500px]">
+          <Image
+            // Image url structure is : strapiUrl/uplooads/image
+            src={`${process.env.STRAPI_URL}${coverImage.attributes.url}`}
+            alt={`${coverImage.attributes.alternativeText}` || "cover image"}
+            fill
+            className=" rounded-xl object-cover"
+          />
+        </div>
         <div className=" lg:px-10 xl:px-20">
           <div className="flex flex-col">
             <div className="flex flex-col gap-6">
