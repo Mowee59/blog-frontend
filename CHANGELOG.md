@@ -1,3 +1,10 @@
+## [1.2.7](https://github.com/Mowee59/blog-frontend/compare/v1.2.6...v1.2.7) (2024-12-10)
+
+
+### Bug Fixes
+
+* update Dockerfile with NEXT_PUBLIC_SITE_URL ([665a2fc](https://github.com/Mowee59/blog-frontend/commit/665a2fc4f01882c24ab40241eb233e8ddead2fee))
+
 ## [1.2.6](https://github.com/Mowee59/blog-frontend/compare/v1.2.5...v1.2.6) (2024-12-10)
 
 
