@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/Mowee59/blog-frontend/compare/v1.2.3...v1.2.4) (2024-12-10)
+
+
+### Bug Fixes
+
+* add cover image to article page and sort articles by publication date ([4a53444](https://github.com/Mowee59/blog-frontend/commit/4a53444e1a9a8534f02523ed34d77f4daa2ab55c))
+
 ## [1.2.3](https://github.com/Mowee59/blog-frontend/compare/v1.2.2...v1.2.3) (2024-12-06)
 
 
