@@ -69,7 +69,7 @@ export const fetchArticles: QueryFunction<
 
   const [_key, queryParams = ""] = queryKey;
   const response = await apiClient.get(
-    `/articles?pagination[pageSize]=${PAGE_SIZE}&pagination[page]=${pageParam}&populate[tags][fields][0]=name&populate[coverImage][fields][0]=name&populate[coverImage][fields][1]=alternativeText&populate[coverImage][fields][2]=caption&populate[coverImage][fields][3]=formats&fields[0]=title&fields[1]=description&fields[2]=publishedAt&fields[3]=slug&status=published&${queryParams}`,
+    `/articles?pagination[pageSize]=${PAGE_SIZE}&pagination[page]=${pageParam}&populate[tags][fields][0]=name&populate[coverImage][fields][0]=name&populate[coverImage][fields][1]=alternativeText&populate[coverImage][fields][2]=caption&populate[coverImage][fields][3]=formats&fields[0]=title&fields[1]=description&fields[2]=publishedAt&fields[3]=slug&status=published&sort[0]=publishedAt:desc&${queryParams}`,
   );
   return {
     data: response.data,
