@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/Mowee59/blog-frontend/compare/v1.2.4...v1.2.5) (2024-12-10)
+
+
+### Bug Fixes
+
+* add metadataBase to metadata configuration ([45f2e13](https://github.com/Mowee59/blog-frontend/commit/45f2e1383328fa5e20430c2b76ad6111a5a2d604))
+
 ## [1.2.4](https://github.com/Mowee59/blog-frontend/compare/v1.2.3...v1.2.4) (2024-12-10)
 
 
