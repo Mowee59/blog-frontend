@@ -86,7 +86,7 @@ export async function generateMetadata({
       images: seo.metaImage
         ? [
             {
-              url: seo.metaImage.data.attributes.url,
+              url: `${process.env.STRAPI_URL}${seo.metaImage.data.attributes.url}`,
               width: seo.metaImage.data.attributes.width,
               height: seo.metaImage.data.attributes.height,
               alt:
