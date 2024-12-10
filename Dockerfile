@@ -22,6 +22,9 @@ FROM base AS builder
 # Strapi
 ARG STRAPI_URL=https://strapi.aniss.dev
 ENV STRAPI_URL=${STRAPI_URL}
+# Site URL
+ARG NEXT_PUBLIC_SITE_URL=https://blog.aniss.dev
+ENV NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
 
 
 
