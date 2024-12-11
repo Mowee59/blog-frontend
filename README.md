@@ -1,88 +1,67 @@
-# Blog Frontend
+## Statut du Projet
 
-### Core Technologies
+![Statut des Dépendances](https://img.shields.io/librariesio/github/Mowee59/blog-frontend?style=for-the-badge)
+![Statut de la Build](https://img.shields.io/github/actions/workflow/status/Mowee59/blog-frontend/ci.yml?branch=main&style=for-the-badge)
+
+## Technologies Principales
+
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-### Backend
-![Strapi](https://img.shields.io/badge/Strapi-2F2E8B?style=for-the-badge&logo=strapi&logoColor=white)
-
-### Development Tools
-[![Node.js Version](https://img.shields.io/badge/node-%3E%3D%2020.0.0-brightgreen)](https://nodejs.org/)
-[![Yarn Version](https://img.shields.io/badge/yarn-%3E%3D%201.22.0-blue)](https://yarnpkg.com/)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-
-### Libraries & Frameworks
-![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white)
-![TanStack Query](https://img.shields.io/badge/TanStack_Query-FF4154?style=for-the-badge&logo=react-query&logoColor=white)
-
-### Testing
-![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
-![Testing Library](https://img.shields.io/badge/Testing_Library-E33332?style=for-the-badge&logo=testing-library&logoColor=white)
-
-### Project Status
-![Dependency Status](https://img.shields.io/librariesio/github/Mowee59/blog-frontend?style=for-the-badge)
-![Build Status](https://img.shields.io/github/actions/workflow/status/Mowee59/blog-frontend/ci.yml?branch=main&style=for-the-badge)
-
-This is a blog application built with Next.js, React, TypeScript, and Tailwind CSS, using Strapi as a headless CMS.
-
 ## Description
 
-This project is a Next.js application with a Docker setup and GitHub Actions workflow for continuous integration and deployment. It integrates with a Strapi backend for content management and includes a comprehensive test suite.
+Ce projet est une application de blog construite avec Next.js, React, TypeScript et Tailwind CSS, utilisant Strapi comme CMS headless. Il est configuré avec Docker et utilise GitHub Actions pour l'intégration et le déploiement continu.
 
-## Features
+## Fonctionnalités
 
-- Next.js frontend
-- Strapi backend integration
-- Docker containerization
-- Automated build and push to GitHub Container Registry
-- Image optimization and remote patterns configuration
-- API request forwarding to Strapi
-- CORS configuration for revalidation endpoint
-- Comprehensive test suite using Jest and React Testing Library
+- Frontend avec Next.js
+- Intégration avec un backend Strapi
+- Conteneurisation avec Docker
+- Build automatisé et push vers le GitHub Container Registry, avec tests et versionning
+- Optimisation des images et configuration des modèles distants
+- Redirection des requêtes API vers Strapi
+- Utilisation de l'ISR ( Incremental Static Generation ) pour une site poptimisé
+- Integration avec le CDN de CLoudflare et revalidation du cache pour les pages mises à jour
+- Suite de tests complète avec Jest et React Testing Library
 
-## Getting Started
-
-### Prerequisites
+## Prérequis
 
 - Node.js
 - Docker
-- GitHub account
+- Compte GitHub
 
-### Installation
+## Installation
 
-1. Clone the repository:
+1. Clonez le dépôt :
    ```bash
-   git clone https://github.com/your-username/your-repo-name.git
+   git clone https://github.com/votre-nom-utilisateur/votre-nom-de-repo.git
    ```
-2. Install dependencies:
+2. Installez les dépendances :
    ```bash
    yarn install
    ```
 
-### Environment Variables
+## Variables d'environnement
 
-Create a `.env.local` file in the root directory and add the following variables:
+Créez un fichier `.env` à la racine du projet et ajoutez les variables suivantes :
 
-| Variable | Description |
-|----------|-------------|
-| PORT | The port number on which the Next.js application will run (e.g., 3000) |
-| STRAPI_URL | The URL of your Strapi backend (e.g., https://strapi.example.com) |
-| WEBHOOK_SECRET | A secret key used for webhook authentication |
-| NEXT_PUBLIC_SITE_URL | The public URL of your Next.js frontend (e.g., https://www.example.com) |
-| NEXT_PUBLIC_MEASUREMENT_ID | Your Google Analytics measurement ID (e.g., G-XXXXXXXXXX) |
+| Variable             | Description                                                                     |
+| -------------------- | ------------------------------------------------------------------------------- |
+| STRAPI_URL           | L'URL de votre backend Strapi (par exemple, https://strapi.example.com)         |
+| WEBHOOK_SECRET       | Une clé secrète utilisée pour l'authentification des webhooks Strapi            |
+| NEXT_PUBLIC_SITE_URL | L'URL publique de votre frontend Next.js (par exemple, https://www.example.com) |
+| CLOUDFLARE_API_TOKEN | Token d'API Cloudflare pour la gestion du cache et des pages                    |
+| CLOUDFARE_ZONE_ID    | L'identifiant de zone Cloudflare pour votre domaine                             |
 
-### Running the Application
+## Démarrage de l'application
 
-To start the development server, run:
+Pour démarrer le serveur de développement, exécutez :
 
-## License
+```bash
+yarn dev
+```
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+## Licence
 
-This project is licensed under the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for details.
-
-### License Headers
-
-All source files in this project should include the following license header:
+Ce projet est sous licence GNU General Public License v3.0. Consultez le fichier [LICENSE](LICENSE) pour plus de détails.
