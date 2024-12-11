@@ -31,7 +31,7 @@ Ce projet est une application de blog construite avec Next.js, React, TypeScript
 
 1. Clonez le dépôt :
    ```bash
-   git clone https://github.com/votre-nom-utilisateur/votre-nom-de-repo.git
+   git clone https://github.com/Mowee59/blog-frontend.git
    ```
 2. Installez les dépendances :
    ```bash
