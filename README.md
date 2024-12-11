@@ -1,7 +1,3 @@
-## Statut du Projet
-
-![Statut des Dépendances](https://img.shields.io/librariesio/github/Mowee59/blog-frontend?style=for-the-badge)
-![Statut de la Build](https://img.shields.io/github/actions/workflow/status/Mowee59/blog-frontend/ci.yml?branch=main&style=for-the-badge)
 
 ## Technologies Principales
 
