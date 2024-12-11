@@ -1,3 +1,25 @@
+## [1.2.7](https://github.com/Mowee59/blog-frontend/compare/v1.2.6...v1.2.7) (2024-12-10)
+
+
+### Bug Fixes
+
+* update Dockerfile with NEXT_PUBLIC_SITE_URL ([665a2fc](https://github.com/Mowee59/blog-frontend/commit/665a2fc4f01882c24ab40241eb233e8ddead2fee))
+
+## [1.2.6](https://github.com/Mowee59/blog-frontend/compare/v1.2.5...v1.2.6) (2024-12-10)
+
+
+### Bug Fixes
+
+* add metadataBase to metadata configuration ([8435076](https://github.com/Mowee59/blog-frontend/commit/8435076a8afa2341ba6ed4f1a289f4dc14dad570))
+* add NEXT_PUBLIC_SITE_URL to Dockerfile ([1782d0d](https://github.com/Mowee59/blog-frontend/commit/1782d0d22020a1c771e42af3cff00d152fa01a8c))
+
+## [1.2.5](https://github.com/Mowee59/blog-frontend/compare/v1.2.4...v1.2.5) (2024-12-10)
+
+
+### Bug Fixes
+
+* add metadataBase to metadata configuration ([45f2e13](https://github.com/Mowee59/blog-frontend/commit/45f2e1383328fa5e20430c2b76ad6111a5a2d604))
+
 ## [1.2.4](https://github.com/Mowee59/blog-frontend/compare/v1.2.3...v1.2.4) (2024-12-10)
 
 
