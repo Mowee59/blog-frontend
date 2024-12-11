@@ -1,8 +1,3 @@
-## Statut du Projet
-
-![Statut des Dépendances](https://img.shields.io/librariesio/github/Mowee59/blog-frontend?style=for-the-badge)
-![Statut de la Build](https://img.shields.io/github/actions/workflow/status/Mowee59/blog-frontend/ci.yml?branch=main&style=for-the-badge)
-
 ## Technologies Principales
 
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
@@ -21,8 +16,8 @@ Ce projet est une application de blog construite avec Next.js, React, TypeScript
 - Build automatisé et push vers le GitHub Container Registry, avec tests et versionning
 - Optimisation des images et configuration des modèles distants
 - Redirection des requêtes API vers Strapi
-- Utilisation de l'ISR ( Incremental Static Generation ) pour une site poptimisé
-- Integration avec le CDN de CLoudflare et revalidation du cache pour les pages mises à jour
+- Utilisation de l'ISR ( Incremental Static Generation ) pour un site optimisé
+- Intégration avec le CDN de CLoudflare et revalidation du cache pour les pages mises à jour
 - Suite de tests complète avec Jest et React Testing Library
 
 ## Prérequis
