@@ -198,7 +198,7 @@ const Article = async ({ params }: { params: { slug: string } }) => {
           </div>
           <article
             dangerouslySetInnerHTML={{ __html: parsedMarkdown }}
-            className="prose prose-slate dark:prose-invert lg:prose-xl prose-img:rounded-xl"
+            className="prose-blockquote::text-sm prose prose-slate max-w-none dark:prose-invert lg:prose-xl prose-img:rounded-xl"
           ></article>
         </div>
       </main>

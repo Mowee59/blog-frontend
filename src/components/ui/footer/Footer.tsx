@@ -26,20 +26,20 @@ const Footer = () => {
     {
       name: "Github",
       href: "https://github.com/mowee59",
-      icon: "/svg/arrowLink.svg"
+      icon: "/svg/arrowLink.svg",
     },
     {
-      name: "LinkedIn", 
-      href: "#",
-      icon: "/svg/arrowLink.svg"
-    }
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/in/aniss-mahfoudi",
+      icon: "/svg/arrowLink.svg",
+    },
   ];
 
   const legalLinks = [
     {
       name: "Mentions légales",
-      href: "/mentions-legales"
-    }
+      href: "/mentions-legales",
+    },
   ];
 
   return (
